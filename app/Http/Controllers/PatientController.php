@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Complaint;
 use Illuminate\Support\Facades\Hash;
+use DB;
 
 class PatientController extends Controller
 {
@@ -64,11 +65,20 @@ class PatientController extends Controller
 
         if ($request->session()->has('register')) {
             $register = $request->session()->all();
-
+            $states = DB::table("states")->pluck("name","id");
             // $register = $request->session()->get('register');
+           
         }
 
-        return view('Patient.register-step2',compact('register'));
+        return view('Patient.register-step2',compact(['register','states']));
+    }
+
+    public function myformAjax($id)
+    {
+        $cities = DB::table("cities")
+                    ->where("state_id",$id)
+                    ->pluck("name","id");
+        return json_encode($cities);
     }
 
     public function PostcreateStepTwo(Request $request)
@@ -83,6 +93,7 @@ class PatientController extends Controller
             'phone_number'   => 'sometimes',
             'dob'            => 'required'
         ]);
+
 
 
         if(empty($request->session()->get('register'))){

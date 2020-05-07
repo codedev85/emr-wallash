@@ -12,6 +12,7 @@ class SettingsController extends Controller
     public function profile($settings){
 
         $findPatient = User::where('id',$settings)->with('subscription')->firstorfail();
+        //dd($findPatient);
         return view('Settings.setting', compact('findPatient'));
     }
 }

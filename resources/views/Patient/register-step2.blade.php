@@ -17,6 +17,8 @@
 
   <!-- Custom styles for this template-->
   <link href="../../css/sb-admin-2.css" rel="stylesheet">
+  <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+  <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
 
 </head>
 
@@ -28,8 +30,8 @@
       <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
         <div class="row">
-          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-          <div class="col-lg-7">
+          {{-- <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> --}}
+          <div class="col-lg-12">
             <div class="p-5">
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Personal Information</h1>
@@ -86,15 +88,18 @@
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="state">State</label>
                     <select name="state" class="form-control">
-                         <option value="1">Osun</option>
-                         <option value="2">Ogun</option>
+                        <option value="">--- Select State ---</option>
+                        @foreach($states as $key => $state)
+
+                         <option value="{{ $key }}">{{ $state }}</option>
+                         @endforeach
+
                     </select>
                   </div>
                   <div class="col-sm-6">
                     <label for="lga">LGA</label>
-                    <select name="lga" class="form-control">
-                         <option value="1">Akoko</option>
-                         <option value="2">Sapon</option>
+                    <select name="city" class="form-control">
+
                     </select>
                   </div>
                 </div>
@@ -122,6 +127,33 @@
 
   <!-- Custom scripts for all pages-->
   <script src="../js/sb-admin-2.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name="state"]').on('change', function() {
+            var stateID = $(this).val();
+            if(stateID) {
+                $.ajax({
+                    url: '/myform/ajax/'+stateID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+
+                        $('select[name="city"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="city"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+
+
+                    }
+                });
+            }else{
+                $('select[name="city"]').empty();
+            }
+        });
+    });
+</script>
 
 </body>
 

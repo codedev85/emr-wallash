@@ -7,7 +7,8 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
-            <h1 class="h3 mb-0 text-gray-800"> Register Doctor </h1>
+            <h1 class="h3 mb-0 text-gray-800"> Bulk Import - (Excel Import)</h1>
+            <a href="{{ URL::to('downloadExcel/xlsx') }}"> <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Export Data</button></a>
           </div>
 
 
@@ -20,36 +21,22 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
                         <a href="#collapseCardExample5" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                        <h6 class="m-0 font-weight-bold text-primary">Register Doctor</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Import States</h6>
+
                         </a>
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample5">
                         <div class="card-body">
-                       <form action="{{ url('/doctors/store') }}" method="POST">
+                       <form action="{{ url('/import-data/') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <label>Register</label>
+                        <label>Import State</label>
 
                         <div>
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="Full Name"/>
-                           <span class="text-danger">{{ $errors->first('plan') }} </span>
-                        </div>
-                        <div>
-                            <label>Email</label>
-                           <input type="email" name="email" class="form-control" placeholder="Email" />
-                           <span class="text-danger">{{ $errors->first('email') }}</span>
-                        </div>
-                        <div>
-                            <label>Phone Number</label>
-                           <input type="text" name="phone_number" class="form-control" placeholder="Phone Number" />
-                           <span class="text-danger">{{ $errors->first('phone_number') }}</span>
+                            <label>State</label>
+                            <input type="file" name="state" class="form-control"/>
+                           <span class="text-danger">{{ $errors->first('state') }} </span>
                         </div>
 
-                        <div>
-                            <label>Address</label>
-                           <input type="text" name="address" class="form-control" placeholder="Address" />
-                           <span class="text-danger">{{ $errors->first('address') }}</span>
-                        </div>
                          <br>
                      <button class="btn btn-info">Register</button>
                        </form>

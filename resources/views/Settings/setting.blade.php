@@ -93,7 +93,7 @@
                 </div>
                 </div>
             </div>
-
+@if($findPatient->subscription !== NULL)
                 <!-- Collapsable Card Example -->
                 <div class="card shadow mb-4">
                     <!-- Card Header - Accordion -->
@@ -110,6 +110,7 @@
                     </div>
                     </div>
                 </div>
+                @endif
 
             </div>
 

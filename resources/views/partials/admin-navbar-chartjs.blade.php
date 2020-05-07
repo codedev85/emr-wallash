@@ -9,45 +9,54 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Wallash Gloabl - Complaints</title>
+  <title>Wallash Global - Dashboard</title>
 
-  <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom fonts for this template-->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="../../../css/sb-admin-2.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="{{ asset('../css/sb-admin-2.css') }}" rel="stylesheet">
+  <!-- Include this in your blade layout -->
 
-  <!-- Custom styles for this page -->
-  <link href="../../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <style>
-      .box-read{
-          background:green;
-          color:white;
-          text-align:center;
-          border-radius:20px;
-      }
-      .box-unread{
-          background:red;
-          color:white;
-          text-align:center;
-          border-radius:20px;
-      }
-      .box-prescribed{
-          background:blue;
-          color:white;
-          text-align:center;
-          border-radius:20px;
-      }
-  </style>
- 
+    .box-read{
+        background:green;
+        color:white;
+        text-align:center;
+        border-radius:20px;
+    }
+    .box-unread{
+        background:red;
+        color:white;
+        text-align:center;
+        border-radius:20px;
+    }
+    .box-prescribed{
+        background:blue;
+        color:white;
+        text-align:center;
+        border-radius:20px;
+    }
+</style>
+  {{-- ChartScript --}}
+  {{-- @if($usersChart)
+  {!! $usersChart->script() !!}
+  @endif --}}
+  <script src="http://www.chartjs.org/dist/2.7.3/Chart.bundle.js"></script>
+  <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+  
+  <script type="text/javascript" src="{{ asset('js/fusioncharts.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/fusioncharts.charts.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/fusioncharts.theme.fint.js') }}"></script>
 </head>
 
 <body id="page-top">
 
   <!-- Page Wrapper -->
   <div id="wrapper">
-
+    @include('sweet::alert')
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -56,15 +65,15 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Walash Global <sup></sup></div>
+        <div class="sidebar-brand-text mx-3">Wallash Global <sup>2</sup></div>
       </a>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ url('/dashboard') }}">
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -94,10 +103,11 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">All Doctors</h6>
 
-            <a class="collapse-item" href="{{ url('doctor/create') }}">Register</a>
-
+            <a class="collapse-item" href="{{ url('doctors/add') }}">Register</a>
             <a class="collapse-item" href="{{ url('doctors/all') }}">All</a>
-            {{-- <a class="collapse-item" href="{{url('doctor/inactive')}}">Inactive</a> --}}
+
+            {{-- <a class="collapse-item" href="{{ url('doctor/active') }}">Active</a>
+            <a class="collapse-item" href="{{url('doctor/inactive')}}">Inactive</a> --}}
           </div>
         </div>
       </li>
@@ -153,7 +163,6 @@
         </div>
       </li>
 
-
       @endif
 
       <li class="nav-item">
@@ -181,7 +190,7 @@
       <div class="sidebar-heading">
         Adminstartive
       </div>
-
+@if(AUth::user()->role_id == 6)
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
@@ -196,6 +205,7 @@
           </div>
         </div>
       </li>
+      @endif
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages">
@@ -226,6 +236,10 @@
           </div>
         </div>
       </li>
+
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
@@ -411,15 +425,16 @@
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                   Activity Log
                 </a>
+
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
               </div>
+
             </li>
 
           </ul>
 
         </nav>
-        <!-- End of Topbar -->
