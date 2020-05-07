@@ -213,7 +213,7 @@ class PatientController extends Controller
             $patient->allergies = $data['health_summary'];
             $patient->subscription_id = $data['subcription_id'];
             $patient->unique_id = $getId;
-            dd($patient);
+            // dd($patient);
             $patient->save();
 
             alert()->success('Created Successfully, proceed to login', 'Success')->autoclose(5000);
