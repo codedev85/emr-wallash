@@ -23,7 +23,7 @@ Auth::routes();
     ]);
     Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
-    Route::middleware(['auth'])->group(function () {
+   
 
             Route::get('/payment/{plan}/plan','PaymentController@paymentplan');
             Route::put('/payment/{plan}/update','PaymentController@updatePlan');
@@ -115,7 +115,7 @@ Auth::routes();
             Route::group(['prefix'=> 'settings'] , function(){
                 Route::get('/{setting}/profile','SettingsController@profile');
             });
-    });
+ 
 
 
 
