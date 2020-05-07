@@ -37,7 +37,7 @@ $factory->define(User::class, function (Faker $faker) {
         'allergies'  => $faker->sentence,
         'genotype'  => 'O-',
         'bloodgroup'=> 'AA',  
-
+        'subscription_id'=> 0,
         // 'name' => $faker->name,
         // 'email' => 'admin@gmail.com',
         // 'email_verified_at' => now(),
