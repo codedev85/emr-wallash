@@ -168,7 +168,7 @@ class PatientController extends Controller
 
     public function plan(Request $request)
     {
-        $request->session()->get('register');
+        $register = $request->session()->get('register');
 
         return view('Patient.plan',compact('register'));
     }
