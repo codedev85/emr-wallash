@@ -87,8 +87,8 @@ class PatientController extends Controller
             'occupation'     =>  'required',
             'address'        =>  'sometimes',
             'gender'         =>  'required',
-            'state'          =>  'required',
-            'lga'            =>  'required',
+            // 'state'          =>  'required',
+            // 'lga'            =>  'required',
             'marital_status' => 'required',
             'phone_number'   => 'sometimes',
             'dob'            => 'required'
