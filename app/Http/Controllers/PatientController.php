@@ -211,7 +211,8 @@ class PatientController extends Controller
             $patient->genotype = $data['genotype'];
             $patient->bloodgroup = $data['bloodgroup'];
             $patient->allergies = $data['health_summary'];
-            $patient->subscription_id = $data['subcription_id'];
+            $patient->subscription_id = 0;
+            //  $data['subcription_id'];
             $patient->unique_id = $getId;
             // dd($patient);
             $patient->save();
