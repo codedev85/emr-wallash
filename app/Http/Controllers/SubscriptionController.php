@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Subscription;
+use App\User;
 
 class SubscriptionController extends Controller
 {
@@ -15,7 +16,7 @@ class SubscriptionController extends Controller
 
 
     public function create(){
-        
+
         return view('Subscription.create');
     }
 
@@ -61,6 +62,34 @@ class SubscriptionController extends Controller
 
         alert()->success('Subscription Plan Removed Successfully ', 'Success')->autoclose(5000);
         return redirect('/Subscription.all');
+    }
+
+    public function selectPlan(){
+
+        $subs = Subscription::all();
+        return view('Subscription.select')->with('subs',$subs);
+    }
+
+    public function subscribed(Request $request ,$plan){
+
+            request()->validate([
+                'sub_plan' => 'required',
+                'payment_method'=> 'required',
+            ]);
+
+         User::where('id',$plan)->update([
+             'subscription_id' => $request['sub_plan'],
+             'payment_method'=> $request['payment_method']
+         ]);
+
+
+         if($request['payment_method'] == 'card'){
+          
+         return redirect('/card/payment');
+         }
+
+        //  alert()->success('Subscribed to a plan', 'Success')->autoclose(5000);
+        //  return redirect('/dashboard');
     }
 
 }

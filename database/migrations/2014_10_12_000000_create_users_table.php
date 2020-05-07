@@ -36,8 +36,9 @@ class CreateUsersTable extends Migration
             $table->longText('allergies')->nullable();
             $table->string('genotype')->nullable();
             $table->string('bloodgroup')->nullable();
+            $table->string('payment_method')->default('card'); //card and bank
 
-            $table->integer('subscription_id')->nullable();
+            $table->integer('subscription_id')->default(0); //default means no plan 1 in single plan 2 is family
             // $table->integer('prescription_id');
             // $table->integer('complaint_id')->nullable();
 

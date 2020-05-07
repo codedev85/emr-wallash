@@ -17,10 +17,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+    Route::post('/pay', [
+        'uses' => 'PaymentController@redirectToGateway',
+        'as' => 'pay'
+    ]);
+    Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
 
-   Route::get('/dashboard','DashboardController@dashboard');
+    Route::get('/payment/{plan}/plan','PaymentController@paymentplan');
+    Route::put('/payment/{plan}/update','PaymentController@updatePlan');
+    Route::get('/card/payment','PaymentController@paymentForm');
+
+    Route::get('/dashboard','DashboardController@dashboard');
 
 
     Route::group(['prefix'=> 'patients'] , function(){
@@ -76,6 +84,8 @@ Auth::routes();
        Route::get('/{subscription}/edit','SubscriptionController@edit');
        Route::post('/{subscription}/update','SubscriptionController@update');
        Route::delete('/{subscription}/delete','SubscriptionController@delete');
+       Route::get('/plan','SubscriptionController@selectPlan')->name('subscriptions');
+       Route::post('/{plan}/subscribed','SubscriptionController@subscribed');
 
     });
 
@@ -90,3 +100,15 @@ Auth::routes();
         // Route::delete('/{subscription}/delete','SubscriptionController@delete');
 
      });
+
+
+     Route::group(['prefix'=> 'settings'] , function(){
+
+
+         Route::get('/{setting}/profile','SettingsController@profile');
+
+     });
+
+
+
+
