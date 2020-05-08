@@ -56,7 +56,7 @@
                       <label for="occupation">Payment Method</label>
                       <select class="form-control" name="payment_method">
                        <option value="card"> Card Payment</option>
-                       <option value="cash"> Cash Payment</option>
+                       {{-- <option value="cash"> Cash Payment</option> --}}
                       </select>
                     </div>
 
