@@ -105,8 +105,8 @@ Auth::routes();
                 Route::get('/{subscription}/edit','SubscriptionController@edit')->middleware(['auth','admin']);
                 Route::post('/{subscription}/update','SubscriptionController@update')->middleware(['auth','admin']);
                 Route::delete('/{subscription}/delete','SubscriptionController@delete')->middleware(['auth','admin']);
-                Route::get('/plan','SubscriptionController@selectPlan')->name('subscriptions');
-                Route::post('/{plan}/subscribed','SubscriptionController@subscribed');
+                Route::get('/plan','SubscriptionController@selectPlan')->name('subscriptions')->middleware(['auth']);
+                Route::post('/{plan}/subscribed','SubscriptionController@subscribed')->middleware(['auth']);
 
             });
 
@@ -127,6 +127,8 @@ Auth::routes();
             Route::group(['prefix'=> 'settings'] , function(){
                 Route::get('/{setting}/profile','SettingsController@profile')->middleware(['auth']);
             });
+            //view logs 
+            Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware(['auth','admin']);
  
 
 
