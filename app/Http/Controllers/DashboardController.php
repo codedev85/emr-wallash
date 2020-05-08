@@ -22,6 +22,7 @@ class DashboardController extends Controller
         $doctor  = User::where('role_id',2)->count();
         $prescription = Prescription::count();
         $complaint = Complaint::count();
+        $patients = User::where('role_id',6)->orderBy('name')->paginate(10);
 
         $api = url('/chart-line-ajax');
    
@@ -29,7 +30,7 @@ class DashboardController extends Controller
         $chart->labels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])->load($api);
        
 
-        return view('Dashboard.dashboard' ,compact(['findPatient', 'patient','doctor','prescription','complaint','chart']));
+        return view('Dashboard.dashboard' ,compact(['findPatient', 'patient','doctor','prescription','complaint','chart','patients']));
     }
 
 

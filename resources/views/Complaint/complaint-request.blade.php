@@ -22,8 +22,9 @@
                       <th>Start Date</th>
                       <th>Self Medication</th>
                       <th>Status</th>
-                      <th>Date Sent</th>
-                      <th>Attended To</th>
+                      {{-- <th>Date Sent</th>
+                      <th>Attended To</th> --}}
+                      <th>Action</th>
                     </tr>
                   </thead>
                   {{-- <tfoot>
@@ -39,8 +40,8 @@
                   <tbody>
                       @foreach($findHistories as $history)
                         <tr>
-                        <td>{{ $history->symptoms }}/td>
-                        <td>{{ $history->start_date_date }}</td>
+                        <td>{{ $history->symptoms }}</td>
+                        <td>{{ $history->start_date->diffforhumans() }}</td>
                         <td>{{ $history->self_medication }}</td>
                         <td>
                             @if($history->status == 0)
@@ -52,8 +53,27 @@
                             @endif
 
                         </td>
-                        <td>{{ $history->created_at }}</td>
-                        <td>{{ $history->updated_at }}</td>
+                        {{-- <td>{{ $history->created_at->format('D m Y') }}</td>
+                        <td>{{ $history->updated_at }}</td> --}}
+                        <td>
+                          @if($history->status == 2)
+                              <div class="dropdown no-arrow mb-4">
+                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   Action</button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{{ url('/complaints/'.$history->id.'/prescription') }}">View Presciption</a>
+                                  </div>
+                                </div>
+                                @else 
+                                 <div class="dropdown no-arrow mb-4">
+                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   Action</button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{{ url('/dashboard') }}">View Profile</a>
+                                  </div>
+                                </div>
+                                @endif
+                         </td>
                         </tr>
                     @endforeach
 
@@ -62,7 +82,7 @@
               </div>
             </div>
           </div>
-
+{{$findHistories->links()}}
         </div>
         <!-- /.container-fluid -->
 
@@ -73,7 +93,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span>Copyright &copy; WallashGlobal 2020</span>
           </div>
         </div>
       </footer>
@@ -124,7 +144,7 @@
   <script src="../../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../../../js/demo/datatables-demo.js"></script>
+  {{-- <script src="../../../js/demo/datatables-demo.js"></script> --}}
 
 </body>
 

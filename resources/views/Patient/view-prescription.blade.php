@@ -106,18 +106,63 @@
                 <!-- Dropdown Card Example -->
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
+                    @if(Auth::user()->role_id == 6)
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
                         <a href="#collapseCardExample5" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                        <h6 class="m-0 font-weight-bold text-primary">Add Prescription</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Give Feedback</h6>
                         </a>
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample5">
                         <div class="card-body">
-
+                        <form method="post" action="{{url('/patients/'.$prescription->id.'/feedback')}}">
+                             <textarea class="form-control" rows="6" name="feedback"></textarea>
+                             <br>
+                             <button class="btn btn-danger">Send FeedBack</button>
+                        </form>
                         </div>
                         </div>
                     </div>
+                    @else  
+                      <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Patient's Feedback</h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                      <th>Name</th>
+                      <th>Unique Id</th>
+                      <th>Email</th>
+                      <th>Feeback</th>
+                      <th>Action</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                       {{-- @foreach($prescription->user as  $patient)
+                     
+                          <tr>
+                          <td>{{ $patient->name }}</td>
+                          <td class="text-info">{{ $patient->unique_id }}</td>
+                          <td>{{ $patient->email }}</td>
+                          <td>{{ $patient->phone_number }}</td>
+                          <td>
+                             {{ $patient->address }}
+
+                          </td>
+                          <td>{{ $patient->subscription_id }}</td>
+                      
+                          </tr>
+                        @endforeach --}}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+                    @endif
                 </div>
              </div>
           </div>

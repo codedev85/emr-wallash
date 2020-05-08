@@ -43,15 +43,21 @@ class ComplaintController extends Controller
 
     public function complaintHistory($comlaint){
 
-        $findHistories = Complaint::where('user_id',Auth::user()->id)->orderBy('created_at','Desc')->get();
-
+        $findHistories = Complaint::where('user_id',Auth::user()->id)->with(['user'])->orderBy('created_at','DESC')->paginate(10);
+// dd($findHistories);
 
         return view('Complaint.complaint-request',compact('findHistories'));
     }
 
+    public function findPrescriptionForComplaint($complaint){
+
+      $prescription = Prescription::where('user_id',Auth::user()->id)->where('id',$complaint)->with('user')->firstorfail();
+      return view('Patient.view-prescription', compact('prescription'));
+    }
+
     public function allComplaints(){
 
-        $complaints = Complaint::with('user')->orderBy('created_at','DESC')->get();
+        $complaints = Complaint::with('user')->orderBy('created_at','DESC')->paginate(10);
 
 
         return view('Complaint.all',compact('complaints'));

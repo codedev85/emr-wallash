@@ -6,7 +6,7 @@
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Complaints</h1>
-          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+          {{-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -67,7 +67,7 @@
                                  Action</button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                   <a class="dropdown-item" href="{{ url('/complaints/'.$history->id.'/show') }}">View</a>
-                                  <a class="dropdown-item" href="">Prescribe</a>
+                                  {{-- <a class="dropdown-item" href="">Prescribe</a> --}}
                                   {{-- <a class="dropdown-item" href="#">Remove Patient</a> --}}
                                 </div>
                               </div>
@@ -80,7 +80,7 @@
               </div>
             </div>
           </div>
-
+{{$complaints->links()}}
         </div>
         <!-- /.container-fluid -->
 
@@ -142,7 +142,7 @@
   <script src="../../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../../../js/demo/datatables-demo.js"></script>
+  {{-- <script src="../../../js/demo/datatables-demo.js"></script> --}}
 
 </body>
 

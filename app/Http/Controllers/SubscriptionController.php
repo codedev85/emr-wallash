@@ -10,7 +10,7 @@ class SubscriptionController extends Controller
 {
     //
     public function allSubscriptions(){
-         $subs = Subscription::all();
+         $subs = Subscription::paginate(5);
         return view('Subscription.all' ,compact('subs'));
     }
 

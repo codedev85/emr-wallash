@@ -59,7 +59,7 @@ class DoctorController extends Controller
 
     public function allDoctors(){
 
-        $doctors = User::where('role_id',2)->get();
+        $doctors = User::where('role_id',2)->orderby('name')->paginate(10);
 
         return view('Doctor.all',compact('doctors'));
     }

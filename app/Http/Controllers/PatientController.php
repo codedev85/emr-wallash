@@ -228,7 +228,7 @@ class PatientController extends Controller
 
     public function allPatient(){
 
-        $patients = User::where('role_id',6)->orderBy('name','desc')->get();
+        $patients = User::where('role_id',6)->orderBy('name','desc')->paginate(10);
 
         return view('Patient.all', compact('patients'));
 

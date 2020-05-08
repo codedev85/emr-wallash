@@ -94,7 +94,9 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">All Doctors</h6>
 
-            <a class="collapse-item" href="{{ url('doctor/create') }}">Register</a>
+             @if(Auth::user()->role_id == 1)
+            <a class="collapse-item" href="{{ url('doctors/add') }}">Register</a>
+            @endif
 
             <a class="collapse-item" href="{{ url('doctors/all') }}">All</a>
             {{-- <a class="collapse-item" href="{{url('doctor/inactive')}}">Inactive</a> --}}
@@ -147,8 +149,8 @@
             <a class="collapse-item" href="{{ url('patients/register')}}">Register</a>
 
             <a class="collapse-item" href="{{ url('/patients/all') }}">View All</a>
-            <a class="collapse-item" href="utilities-animation.html">Active</a>
-            <a class="collapse-item" href="utilities-other.html">Inactive</a>
+            {{-- <a class="collapse-item" href="utilities-animation.html">Active</a>
+            <a class="collapse-item" href="utilities-other.html">Inactive</a> --}}
           </div>
         </div>
       </li>
@@ -165,7 +167,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Medical History</h6>
             @if(Auth::user()->role_id == 6)
-                <a class="collapse-item" href="utilities-color.html">Precriptions</a>
+                <a class="collapse-item" href="{{url('/prescriptions/'.Auth::user()->id.'/user')}}">Precriptions</a>
                 <a class="collapse-item" href="{{ url('patients/'.Auth::user()->id. '/complaints/history/') }}">Complaints</a>
                 @elseif(Auth::user()->role_id < 3)
                 <a class="collapse-item" href="{{ url('complaints/all/complaints') }}">All Complaints</a>

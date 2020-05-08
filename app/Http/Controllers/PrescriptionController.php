@@ -85,9 +85,18 @@ class PrescriptionController extends Controller
 
    public function allPrescription(){
 
-    $prescriptions = Prescription::orderBy('created_at','Desc')->with('user')->get();
+    $prescriptions = Prescription::orderBy('created_at','Desc')->with('user')->paginate(10);
 
     return view('Prescription.all',compact('prescriptions'));
+   }
+
+   public function userPrescriptions($prescription){
+
+
+     $findPrescription = Prescription::where('user_id',$prescription)->with('complaint')->paginate(10);
+    
+
+     return view('Patient.my-prescription',compact('findPrescription'));
    }
 
 

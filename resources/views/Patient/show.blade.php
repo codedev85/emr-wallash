@@ -154,7 +154,7 @@
                                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                    Action</button>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ url('/complaints/'.$history->id.'/show') }}">View</a>
+                                    <a class="dropdown-item" href="{{ url('/prescriptions/'.$history->id.'/view') }}">View Prescription</a>
                                     {{-- <a class="dropdown-item" href="">Prescribe</a> --}}
                                     {{-- <a class="dropdown-item" href="#">Remove Patient</a> --}}
                                   </div>

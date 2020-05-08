@@ -13,13 +13,13 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Doctors</h1>
+            <h1 class="h3 mb-2 text-gray-800">Prescriptions</h1>
             {{-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
               <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Doctor</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Prescriptions</h6>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -27,33 +27,40 @@
                     <thead>
                       <tr>
                       <th>Name</th>
-                      <th>Unique Id</th>
-                      <th>Email</th>
-                      <th>Phone Number</th>
-                      <th>Address</th>
-                      <th>Created Date</th>
+                      <th>Doctor</th>
+                      <th>Prescription</th>
+                      <th>Status</th>
+                      
+                      <th>Prescribed</th>
                       <th>Action</th>
                       </tr>
                     </thead>
 
                     <tbody>
-                       @foreach($doctors as  $patient)
+                       @foreach($findPrescription as  $patient)
                           <tr>
-                          <td>{{ $patient->name }}</td>
-                          <td class="text-info">{{ $patient->unique_id }}</td>
-                          <td>{{ $patient->email }}</td>
-                          <td>{{ $patient->phone_number }}</td>
+                          <td>{{ $patient->ailment }}</td>
+                          <td> Dr {{ $patient->doc_name }}</td>
+                          <td>{{ $patient->prescription }}</td>
                           <td>
-                             {{ $patient->address }}
+                                             
+                            @if($patient->complaint->status == 0)
+                           <div class="box-unread">Unread</div>
+                            @elseif($patient->complaint->status == 1)
+                            <div class="box-read">Read</div>
+                            @else
+                            <div class="box-prescribed">Prescribed</div>
+                            @endif
 
+                       
                           </td>
-                          <td>{{ $patient->created_at }}</td>
+                          <td>{{ $patient->created_at->diffforhumans() }}</td>
                           <td>
                               <div class="dropdown no-arrow mb-4">
                                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                    Action</button>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ url('/patients/'.$patient->id.'/show') }}">View {{ $patient->name }}'s Profile</a>
+                                    <a class="dropdown-item" href="{{ url('/prescriptions/'.$patient->id.'/view') }}">View More Details</a>
                                     {{-- @if($history->status == 2)
                                     <a class="dropdown-item" href="{{ url('/prescriptions/'.$patient->id.'/view') }}">View Prescription</a>
                                     @endif --}}
@@ -67,7 +74,7 @@
                 </div>
               </div>
             </div>
-{{$doctors->links()}}
+{{$findPrescription->links()}}
           </div>
 
 
