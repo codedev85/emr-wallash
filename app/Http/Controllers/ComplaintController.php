@@ -87,7 +87,7 @@ class ComplaintController extends Controller
 
 
 
-        return view('Complaint.show', compact(['findPatient','complaintHistories','docName']));
+        return view('Complaint.show', compact(['findPatient','complaintHistories']));
 
 
     }
