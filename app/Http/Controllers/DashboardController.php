@@ -23,6 +23,9 @@ class DashboardController extends Controller
         $findPatient = User::where('id',Auth::user()->id)->firstOrfail();
         $patient = User::where('role_id',6)->count();
         $doctor  = User::where('role_id',2)->count();
+        $allUsers  = User::all()->count();
+        // $admin  = User::where('role_id',2)->count();
+        // $admin  = User::where('role_id',4)->count();
         $prescription = Prescription::count();
         $complaint = Complaint::count();
         $patients = User::where('role_id',6)->orderBy('name')->paginate(10);
@@ -35,7 +38,7 @@ class DashboardController extends Controller
         $chart->labels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])->load($api);
        
 
-        return view('Dashboard.dashboard' ,compact(['findPatient', 'patient','doctor','prescription','complaint','chart','patients']));
+        return view('Dashboard.dashboard' ,compact(['findPatient', 'patient','doctor','prescription','complaint','chart','patients','allUsers']));
     }
 
 
