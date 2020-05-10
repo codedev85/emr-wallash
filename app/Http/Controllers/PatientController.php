@@ -251,7 +251,7 @@ class PatientController extends Controller
       
     //    dd($age);
         $complaints  = Complaint::where('user_id',$patient)->orderBy('created_at','DESC')->get();
-
+// dd($complaints);
         return view('Patient.show',compact(['findPatient','complaints','age']));
 
 
