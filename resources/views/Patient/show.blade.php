@@ -136,10 +136,10 @@
                     <tbody>
                         @foreach($complaints as  $history)
                           <tr>
-                          <td>{{ $history->user->name }}</td>
-                          <td class="text-info">{{ $history->user->unique_id }}</td>
-                          <td>{{ $history->user->email}}</td>
-                          <td>{{ $history->user->phone_number }}</td>
+                          <td>{{ $history->user['name'] }}</td>
+                          <td class="text-info">{{ $history->user['unique_id'] }}</td>
+                          <td>{{ $history->user['email']}}</td>
+                          <td>{{ $history->user['phone_number'] }}</td>
                           <td>{{ $history->symptoms }}</td>
                           <td>{{ $history->start_date->diffForHumans() }}</td>
                           <td>{{ $history->self_medication }}</td>
