@@ -47,7 +47,14 @@
                              {{ $patient->address }}
 
                           </td>
-                          <td>{{ $patient->subscription_id }}</td>
+                          <td>
+                           @if($patient->subscription_id == 0)
+                           <span>No subscription</span>
+                           @else
+                           {{ $patient->subscription->plan }}
+                          @endif
+                          
+                          </td>
                           <td>
                               <div class="dropdown no-arrow mb-4">
                                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -134,7 +141,37 @@
 
   <!-- Custom scripts for all pages-->
   <script src="../../js/sb-admin-2.min.js"></script>
+  <script>
+$(document).ready(function(){
 
+ $('#search').keyup(function(){ 
+ 
+        var query = $(this).val();
+      
+        if(query != '')
+        {
+         var _token = $('input[name="_token"]').val();
+        
+         $.ajax({
+          url:"{{ route('autocomplete.fetch') }}",
+          method:"POST",
+          data:{query:query, _token:_token},
+          success:function(data){
+           
+           $('#searchList').fadeIn();  
+                    $('#searchList').html(data);
+          }
+         });
+        }
+    });
+
+    $(document).on('click', 'li', function(){  
+        $('#search').val($(this).text());  
+        $('#searchList').fadeOut();  
+    });  
+
+});
+</script>
 </body>
 
 </html>

@@ -35,8 +35,8 @@
                     </div>
                     <div class="col-md-7 mt-3">
                         <h6><b>Address: </b>{{ $prescription->user['address'] }}</h6>
-                        <h6><b>State: </b>{{ $prescription->user['state'] }}</h6>
-                        <h6><b>LGA: </b>{{ $prescription->user['lga'] }}</h6>
+                        {{-- <h6><b>State: </b>{{ $prescription->user['state'] }}</h6>
+                        <h6><b>LGA: </b>{{ $prescription->user['lga'] }}</h6> --}}
                     </div>
                 </div>
             </div>
@@ -116,6 +116,9 @@
                         <div class="collapse show" id="collapseCardExample5">
                         <div class="card-body">
                         <form method="post" action="{{url('/patients/'.$prescription->id.'/feedback')}}">
+                        @csrf
+                        <span class="text-danger">{{$errors->first('feedback')}}</span>
+        
                              <textarea class="form-control" rows="6" name="feedback"></textarea>
                              <br>
                              <button class="btn btn-danger">Send FeedBack</button>
@@ -230,7 +233,37 @@
   <!-- Custom scripts for all pages-->
   <script src="../../js/sb-admin-2.min.js"></script>
 
+  <script>
+$(document).ready(function(){
 
+ $('#search').keyup(function(){ 
+ 
+        var query = $(this).val();
+      
+        if(query != '')
+        {
+         var _token = $('input[name="_token"]').val();
+        
+         $.ajax({
+          url:"{{ route('autocomplete.fetch') }}",
+          method:"POST",
+          data:{query:query, _token:_token},
+          success:function(data){
+           
+           $('#searchList').fadeIn();  
+                    $('#searchList').html(data);
+          }
+         });
+        }
+    });
+
+    $(document).on('click', 'li', function(){  
+        $('#search').val($(this).text());  
+        $('#searchList').fadeOut();  
+    });  
+
+});
+</script>
 </body>
 
 </html>

@@ -6,48 +6,56 @@
 
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
-            <h1 class="h3 mb-0 text-gray-800"> Bulk Import - (Excel Import)</h1>
-            <a href="{{ URL::to('downloadExcel/xlsx') }}"> <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Export Data</button></a>
-          </div>
 
 
+        <!-- /.container-fluid -->
 
-            <div class="col-lg-12">
+        <div class="container-fluid">
 
-                <!-- Dropdown Card Example -->
-                <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Accordion -->
-                        <a href="#collapseCardExample5" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                        <h6 class="m-0 font-weight-bold text-primary">Import States</h6>
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">Patient's FeedBack</h1>
+            {{-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
-                        </a>
-                        <!-- Card Content - Collapse -->
-                        <div class="collapse show" id="collapseCardExample5">
-                        <div class="card-body">
-                       <form action="{{ url('/import-data/') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <label>Import State</label>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Patient's Feedback On Prescription</h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                      <th>Prescription</th>
+                      <th>FeedBack</th>
+                     
+                      <th>Date Sent</th>
+                      </tr>
+                    </thead>
 
-                        <div>
-                            <label>State</label>
-                            <input type="file" name="state" class="form-control"/>
-                           <span class="text-danger">{{ $errors->first('state') }} </span>
-                        </div>
-
-                         <br>
-                     <button class="btn btn-info">Register</button>
-                       </form>
-                        </div>
-                        </div>
-                    </div>
+                    <tbody>
+                       @foreach($getFeeds as  $feed)
+                          <tr>
+                          <td>{{ $feed->prescription->prescription }}</td>
+                       
+                          <td>{{ $feed->name}}</td>
+          
+                          <td>
+                             {{$feed->created_at->format('d M Y')}}
+                          </td>
+                          </tr>
+                        @endforeach
+                    </tbody>
+                  </table>
                 </div>
-             </div>
+              </div>
+            </div>
+{{$getFeeds->links()}}
           </div>
 
-        </div>
+
+      </div>
+      <!-- End of Main Content -->
 
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
@@ -101,15 +109,15 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../../vendor/jquery/jquery.min.js"></script>
-  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../vendor/jquery/jquery.min.js"></script>
+  <script src="../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="../../js/sb-admin-2.min.js"></script>
-    <script>
+  <script src="../../../js/sb-admin-2.min.js"></script>
+  <script>
 $(document).ready(function(){
 
  $('#search').keyup(function(){ 
@@ -140,7 +148,6 @@ $(document).ready(function(){
 
 });
 </script>
-
 </body>
 
 </html>

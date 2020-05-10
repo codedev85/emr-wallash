@@ -5,10 +5,14 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
-class User extends Authenticatable
+
+class User extends Authenticatable 
 {
     use Notifiable;
+    //  , LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +24,10 @@ class User extends Authenticatable
         'state','lga','marital_status' ,'genotype','bloodgroup','health_summary'
         ,'subscription_id','dob'
     ];
+   
 
+   
+    // protected static $logAttributes = ['name', 'text'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -37,6 +44,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'dob'               => 'datetime'
     ];
 
     public function role(){
@@ -65,4 +73,14 @@ class User extends Authenticatable
         
         return $this->belongsTo(Subscription::class);
     }
+
+    public function state(){
+        return $this->belongsTo(State::class);
+    }
+
+    public function lga(){
+        return $this->belongsTo(Lga::class);
+    }
+      
+    
 }

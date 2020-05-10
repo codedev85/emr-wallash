@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 
 
+
 class DoctorController extends Controller
 {
     //
@@ -46,7 +47,10 @@ class DoctorController extends Controller
         $newDoctor->password     = Hash::make($data[0]);
         $newDoctor->role_id      = 2; //role doctor
         $newDoctor->unique_id    = $getId;
-
+        // $latestActivities = Activity::latest()->limit(100)->get();
+        // $activity->description; //returns 'created'
+        // $activity->subject; //returns the instance of NewsItem that was created
+        // $activity->changes;
         $newDoctor->save();
 
         Mail::to($data['email'])->send(new AccountInfo($data));

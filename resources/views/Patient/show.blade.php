@@ -26,11 +26,16 @@
                         <h6><b>Name: </b>{{ $findPatient->name }}</h6>
                         <h6><b>Email: </b>{{ $findPatient->email }}</h6>
                         <h6><b>Phoe Number: </b>{{ $findPatient->phone_number }}</h6>
+                        @if($age !== Null)
+                          <h6><b>Age :</b>{{$age}} years old</h6>
+                        @endif
                     </div>
                     <div class="col-md-7 mt-3">
                         <h6><b>Address: </b>{{ $findPatient->address }}</h6>
-                        <h6><b>State: </b>{{ $findPatient->state }}</h6>
-                        <h6><b>LGA: </b>{{ $findPatient->lga }}</h6>
+                        @if($findPatient->state['name'] != Null)
+                        <h6><b>State: </b>{{ Ucfirst($findPatient->state->name) }} State</h6>
+                        <h6><b>LGA: </b>{{ $findPatient->lga->name }}</h6>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -234,7 +239,37 @@
 
   <!-- Custom scripts for all pages-->
   <script src="../../js/sb-admin-2.min.js"></script>
+    <script>
+$(document).ready(function(){
 
+ $('#search').keyup(function(){ 
+ 
+        var query = $(this).val();
+      
+        if(query != '')
+        {
+         var _token = $('input[name="_token"]').val();
+        
+         $.ajax({
+          url:"{{ route('autocomplete.fetch') }}",
+          method:"POST",
+          data:{query:query, _token:_token},
+          success:function(data){
+           
+           $('#searchList').fadeIn();  
+                    $('#searchList').html(data);
+          }
+         });
+        }
+    });
+
+    $(document).on('click', 'li', function(){  
+        $('#search').val($(this).text());  
+        $('#searchList').fadeOut();  
+    });  
+
+});
+</script>
 </body>
 
 </html>

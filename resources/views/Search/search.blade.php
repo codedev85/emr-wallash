@@ -6,48 +6,67 @@
 
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
-            <h1 class="h3 mb-0 text-gray-800"> Bulk Import - (Excel Import)</h1>
-            <a href="{{ URL::to('downloadExcel/xlsx') }}"> <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Export Data</button></a>
-          </div>
 
 
+        <!-- /.container-fluid -->
 
-            <div class="col-lg-12">
+        <div class="container-fluid">
 
-                <!-- Dropdown Card Example -->
-                <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Accordion -->
-                        <a href="#collapseCardExample5" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                        <h6 class="m-0 font-weight-bold text-primary">Import States</h6>
+            <!-- Page Heading -->
 
-                        </a>
-                        <!-- Card Content - Collapse -->
-                        <div class="collapse show" id="collapseCardExample5">
-                        <div class="card-body">
-                       <form action="{{ url('/import-data/') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <label>Import State</label>
+            <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
+                <h1 class="h3 mb-0 text-gray-800">Search Results </h1>
+             
+              </div>
 
-                        <div>
-                            <label>State</label>
-                            <input type="file" name="state" class="form-control"/>
-                           <span class="text-danger">{{ $errors->first('state') }} </span>
-                        </div>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Subscriptions Plan</h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                      <th>Name</th>
+                      <th>Unique Id</th>
+                      <th>Email</th>
+                      <th>Phone Number</th>
+                      <th>Action</th>
+                      </tr>
+                    </thead>
 
-                         <br>
-                     <button class="btn btn-info">Register</button>
-                       </form>
-                        </div>
-                        </div>
-                    </div>
+                    <tbody>
+                       @foreach($data as  $user)
+                          <tr>
+                          <td>{{$user->name}}</td>
+                          <td>{{$user->unique_id}}</td>
+                          <td>{{$user->email}}</td>
+                          <td>{{$user->phone_number}}</td>
+                          <td>
+                               <div class="dropdown no-arrow mb-4">
+                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   Action</button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{{ url('/patients/'.$user->id.'/show') }}">View</a>
+                                  </div>
+                                </div>
+
+                          </td>
+                          </tr>
+                        @endforeach
+                    </tbody>
+                  </table>
                 </div>
-             </div>
+              </div>
+            </div>
+{{-- {{$subs->links()}} --}}
           </div>
 
-        </div>
+
+      </div>
+      <!-- End of Main Content -->
 
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
@@ -109,7 +128,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="../../js/sb-admin-2.min.js"></script>
-    <script>
+  <script>
 $(document).ready(function(){
 
  $('#search').keyup(function(){ 
@@ -140,7 +159,6 @@ $(document).ready(function(){
 
 });
 </script>
-
 </body>
 
 </html>

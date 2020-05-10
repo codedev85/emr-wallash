@@ -1,4 +1,6 @@
-@include('partials.admin-navbar-chartjs');
+@include('partials.admin-navbar-chartjs')
+
+
     <!-- Begin Page Content -->
     <div class="container-fluid">
 @if(Auth::user()->role_id <3)
@@ -308,8 +310,10 @@
                     </div>
                     <div class="col-md-7 mt-3">
                         <h6><b>Address: </b>{{ $findPatient->address }}</h6>
-                        <h6><b>State: </b>{{ $findPatient->state }}</h6>
-                        <h6><b>LGA: </b>{{ $findPatient->lga }}</h6>
+                        @if($findPatient->state->name !== Null)
+                        <h6><b>State: </b>{{ $findPatient->state->name }}</h6>
+                        <h6><b>LGA: </b>{{ $findPatient->lga->name }}</h6>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -436,7 +440,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
-  {!! $chart->script() !!}
+  {{-- {!! $chart->script() !!}
 
   <script type="text/javascript">
       var original_api_url = {{ $chart->id }}_api_url;
@@ -444,7 +448,104 @@
           var year = $(this).val();
           {{ $chart->id }}_refresh(original_api_url + "?year="+year);
       });
-  </script>
+  </script> --}}
+      {{-- <script type="text/javascript">
+
+        var path = "{{ route('autocomplete') }}";
+
+                $('input.typeahead').typeahead({
+                    minLength:1,
+                    delay:500,
+                    source:  function (query, process) {
+                    return $.get(path, { query: query }, function (data) {
+                      
+                             return process(data) ;
+
+                      
+                        });
+                    }
+                });
+
+    </script> --}}
+ {{-- <script type="text/javascript">
+    var path = "{{ route('autocomplete') }}";
+    $('input.typeahead').typeahead({
+        source:  function (query, process) {
+          console.log(query)
+        return $.get(path, { query: query }, function (data) {
+                return process(data);
+            });
+        }
+    });
+</script> --}}
+
+<script>
+$(document).ready(function(){
+
+ $('#search').keyup(function(){ 
+ 
+        var query = $(this).val();
+      
+        if(query != '')
+        {
+         var _token = $('input[name="_token"]').val();
+        
+         $.ajax({
+          url:"{{ route('autocomplete.fetch') }}",
+          method:"POST",
+          data:{query:query, _token:_token},
+          success:function(data){
+           
+           $('#searchList').fadeIn();  
+                    $('#searchList').html(data);
+          }
+         });
+        }
+    });
+
+    $(document).on('click', 'li', function(){  
+        $('#search').val($(this).text());  
+        $('#searchList').fadeOut();  
+    });  
+
+});
+
+/****
+ Below Script is for patient search to search thru prescriptions 
+ implement when ready
+****/
+
+// $(document).ready(function(){
+
+//  $('#searchP').keyup(function(){ 
+ 
+//         var query = $(this).val();
+      
+//         if(query != '')
+//         {
+//          var _token = $('input[name="_token"]').val();
+        
+//          $.ajax({
+//           url:"{{ route('autocomplete.fetch') }}",
+//           method:"POST",
+//           data:{query:query, _token:_token},
+//           success:function(data){
+           
+//            $('#searchListP').fadeIn();  
+//                     $('#searchListP').html(data);
+//           }
+//          });
+//         }
+//     });
+
+//     $(document).on('click', 'li', function(){  
+//         $('#searchP').val($(this).text());  
+//         $('#searchListP').fadeOut();  
+//     });  
+
+// });
+</script>
+
 </body>
 
 </html>

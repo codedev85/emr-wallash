@@ -29,7 +29,7 @@
         <!-- Nested Row within Card Body -->
         <div class="row">
           {{-- <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> --}}
-          <div class="col-lg-7">
+          <div class="col-lg-12">
             <div class="p-5">
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Health information</h1>
@@ -49,7 +49,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                    <label>Brief Health Summary</label>
+                    <label>Allergies</label>
                   <textarea name="health_summary" class="form-control" rows="10"></textarea>
                 </div>
 

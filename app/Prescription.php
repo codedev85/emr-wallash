@@ -3,11 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Prescription extends Model
 {
     //
+    // use LogsActivity;
 
+   
+    // protected static $logAttributes = ['name', 'text'];
 
 
     public function complaint(){
@@ -18,6 +22,8 @@ class Prescription extends Model
 
         return $this->belongsTo(User::class);
     }
+
+  
 
 
 }

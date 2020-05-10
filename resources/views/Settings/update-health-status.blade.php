@@ -7,8 +7,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
-            <h1 class="h3 mb-0 text-gray-800"> Bulk Import - (Excel Import)</h1>
-            <a href="{{ URL::to('downloadExcel/xlsx') }}"> <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Export Data</button></a>
+            <h1 class="h3 mb-0 text-gray-800"> Update Genotype /Blood Group </h1>
           </div>
 
 
@@ -21,24 +20,27 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
                         <a href="#collapseCardExample5" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                        <h6 class="m-0 font-weight-bold text-primary">Import States</h6>
-
+                        <h6 class="m-0 font-weight-bold text-primary">Update Genotype/Blood Group</h6>
                         </a>
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample5">
                         <div class="card-body">
-                       <form action="{{ url('/import-data/') }}" method="POST" enctype="multipart/form-data">
+                       <form action="{{ url('/settings/update/'.Auth::user()->id.'/health-information') }}" method="POST">
                         @csrf
-                        <label>Import State</label>
+                        <label>Update</label>
 
                         <div>
-                            <label>State</label>
-                            <input type="file" name="state" class="form-control"/>
-                           <span class="text-danger">{{ $errors->first('state') }} </span>
+                            <label>Genotype</label>
+                            <input type="text" name="genotype" class="form-control" value="{{$user->genotype}}"/>
+                           <span class="text-danger">{{ $errors->first('genotype') }} </span>
                         </div>
-
+                        <div>
+                            <label>Blood Group</label>
+                           <input type="text" name="blood_group" class="form-control" value="{{$user->bloodgroup}}" />
+                           <span class="text-danger">{{ $errors->first('blood_group') }}</span>
+                        </div>
                          <br>
-                     <button class="btn btn-info">Register</button>
+                     <button class="btn btn-info">Update</button>
                        </form>
                         </div>
                         </div>
@@ -101,14 +103,14 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../../vendor/jquery/jquery.min.js"></script>
-  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../vendor/jquery/jquery.min.js"></script>
+  <script src="../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="../../js/sb-admin-2.min.js"></script>
+  <script src="../../../js/sb-admin-2.min.js"></script>
     <script>
 $(document).ready(function(){
 

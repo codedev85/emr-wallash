@@ -178,6 +178,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        'Spatie\Activitylog\ActivitylogServiceProvider',
 
     ],
 
@@ -232,6 +233,8 @@ return [
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Activity' => 'Spatie\Activitylog\ActivitylogFacade',
+        'Carbon' => 'Carbon\Carbon',
 
     ],
 

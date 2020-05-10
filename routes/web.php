@@ -64,11 +64,11 @@ Auth::routes();
                 Route::get('/{complaint}/complaints/history','ComplaintController@complaintHistory')->middleware(['auth']);
 
                 //feedback need to implement new feature before final push
-                //create a new controller feed back 
-                //fetch prescription id and useri id 
-                //create a tabel that relates to feed back 
-                
-                Route::post('/{prescription}/feedback' ,'FeedbackController@feedback');
+                //create a new controller feed back
+                //fetch prescription id and useri id
+                //create a tabel that relates to feed back
+
+                Route::post('/{prescription}/feedback' ,'FeedBackController@feedback')->middleware('auth');
 
             });
 
@@ -94,6 +94,9 @@ Auth::routes();
 
                 //user prescriptions
                 Route::get('/{prescription}/user','PrescriptionController@userPrescriptions')->middleware('auth');
+                Route::get('/feedbacks/{prescription}/view' ,'FeedBackController@allUserFeeds')->middleware(['auth']);
+
+                // Route::post('/{prescription)/feedback','PrescriptionController@feedback');
 
             });
 
@@ -123,13 +126,35 @@ Auth::routes();
 
                 });
            });
- 
+
             Route::group(['prefix'=> 'settings'] , function(){
                 Route::get('/{setting}/profile','SettingsController@profile')->middleware(['auth']);
-            });
-            //view logs 
-            Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware(['auth','admin']);
- 
 
+                Route::get('/update/{info}/basic-information','SettingsController@fetchBasicInfo')->middleware(['auth']);
+                Route::post('/update/{info}/basic-information','SettingsController@updateBasicInfo')->middleware(['auth']);
+
+                Route::get('/update/{info}/job-information','SettingsController@fetchJobInfo')->middleware(['auth']);
+                Route::post('/update/{info}/job-information','SettingsController@updateJobInfo')->middleware(['auth']);
+
+                Route::get('/update/{info}/allergy-information','SettingsController@fetchAllergyInfo')->middleware(['auth']);
+                Route::post('/update/{info}/allergy-information','SettingsController@updateAllergyInfo')->middleware(['auth']);
+
+                Route::get('/update/{info}/health-information','SettingsController@fetchHealthInfo')->middleware(['auth']);
+                Route::post('/update/{info}/health-information','SettingsController@updateHealthInfo')->middleware(['auth']);
+
+                Route::get('/update/{info}/plan-information','SettingsController@fetchPlanInfo')->middleware(['auth']);
+                Route::post('/update/{info}/plan-information','SettingsController@updatePlanInfo')->middleware(['auth']);
+
+                Route::get('/update/{info}/password','SettingsController@fetchPasswordPage')->middleware(['auth']);
+                Route::post('/update/{info}/password','SettingsController@updatePasswordInfo')->middleware(['auth']);
+            });
+
+
+            //view logs
+            Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware(['auth','admin']);
+            Route::post('autocomplete', 'DashboardController@fetch')->name('autocomplete.fetch');
+            Route::post('search','DashboardController@search')->name('search');
+            // Route::post('autocomplete', 'DashboardController@fetchPatientQuery')->name('autocomplete.fetch');
+            // Route::post('search','DashboardController@search')->name('search');
 
 

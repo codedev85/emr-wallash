@@ -44,7 +44,7 @@
                        @foreach($subs as  $sub)
                           <tr>
                           <td>{{ $sub->plan }}</td>
-                          <td class="text-info">{{number_format($sub->amount)  }}</td>
+                          <td class="text-info">&#8358; {{number_format($sub->amount)  }}</td>
                       @if(Auth::user()->role_id <3 )
                           <td>
                               <div class="dropdown no-arrow mb-4">
@@ -131,7 +131,37 @@
 
   <!-- Custom scripts for all pages-->
   <script src="../../js/sb-admin-2.min.js"></script>
+  <script>
+$(document).ready(function(){
 
+ $('#search').keyup(function(){ 
+ 
+        var query = $(this).val();
+      
+        if(query != '')
+        {
+         var _token = $('input[name="_token"]').val();
+        
+         $.ajax({
+          url:"{{ route('autocomplete.fetch') }}",
+          method:"POST",
+          data:{query:query, _token:_token},
+          success:function(data){
+           
+           $('#searchList').fadeIn();  
+                    $('#searchList').html(data);
+          }
+         });
+        }
+    });
+
+    $(document).on('click', 'li', function(){  
+        $('#search').val($(this).text());  
+        $('#searchList').fadeOut();  
+    });  
+
+});
+</script>
 </body>
 
 </html>

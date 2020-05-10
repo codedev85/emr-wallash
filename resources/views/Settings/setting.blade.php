@@ -5,10 +5,16 @@
 
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          {{-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800"> Profile Setting</h1>
+          </div> --}}
+              <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
+            <h1 class="h3 mb-0 text-gray-800"> Profile Settings </h1>
+        
+            <a href="{{ url('/settings/update/'.Auth::user()->id.'/password') }}" class="btn btn-primary pull-right"> Update Password</a>
+      
           </div>
-
+<br>
          <div class="row">
 
             <div class="col-lg-6">
@@ -19,7 +25,7 @@
                     <h5 class="h5 mb-0 text-gray-800">
                         Profile Setting
                     </h5>
-                    <a href="{{ url('/prescriptions/add') }}" class="btn btn-info pull-right"> Update Basic Information</a>
+                    <a href="{{ url('/settings/update/'.$findPatient->id.'/basic-information') }}" class="btn btn-info btn-sm pull-right"> Update Basic Information</a>
                   </div>
 
 
@@ -31,8 +37,12 @@
                     </div>
                     <div class="col-md-7 mt-3">
                         <h6><b>Address: </b>{{ $findPatient->address }}</h6>
-                        <h6><b>State: </b>{{ $findPatient->state }}</h6>
-                        <h6><b>LGA: </b>{{ $findPatient->lga }}</h6>
+                        {{-- <h6><b>State: </b>{{ $findPatient->state }}</h6>
+                        <h6><b>LGA: </b>{{ $findPatient->lga }}</h6> --}}
+                            @if($findPatient->state['name'] != Null)
+                        <h6><b>State: </b>{{ Ucfirst($findPatient->state->name) }} State</h6>
+                        <h6><b>LGA: </b>{{ $findPatient->lga->name }}</h6>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -43,7 +53,7 @@
                     <h5 class="h5 mb-0 text-gray-800">
                        Genotype/BloodGroup
                     </h5>
-                    <a href="{{ url('/prescriptions/add') }}" class="btn btn-info pull-right"> Update Health status</a>
+                    <a href="{{ url('/settings/update/'.$findPatient->id.'/health-information') }}" class="btn btn-info btn-sm pull-right"> Update Health status</a>
                   </div>
                 <div class="card-body">
                 <h5><b>Genotype: </b>{{ $findPatient->genotype }}</h5>
@@ -64,7 +74,7 @@
                         <h5 class="h5 mb-0 text-gray-800">
                             Job Status
                         </h5>
-                        <a href="{{ url('/prescriptions/add') }}" class="btn btn-info pull-right"> Update Job Status</a>
+                        <a href="{{ url('/settings/update/'.$findPatient->id.'/job-information') }}" class="btn btn-info btn-sm pull-right"> Update Job Status</a>
                       </div>
                     <!-- Card Content - Collapse -->
                     <div class="collapse show" id="collapseCardExample">
@@ -84,7 +94,7 @@
                     <h5 class="h5 mb-0 text-gray-800">
                         Allergies
                     </h5>
-                    <a href="{{ url('/prescriptions/add') }}" class="btn btn-info pull-right"> Update Allergies</a>
+                    <a href="{{ url('/settings/update/'.$findPatient->id.'/allergy-information') }}" class="btn btn-info btn-sm pull-right"> Update Allergies</a>
                   </div>
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="collapseCardExample1">
@@ -101,12 +111,12 @@
                         <h5 class="h5 mb-0 text-gray-800">
                            Payment Plan
                         </h5>
-                        <a href="{{ url('/payment/'.Auth::user()->id.'/plan') }}" class="btn btn-info pull-right"> Update Payment Plan</a>
+                        <a href="{{ url('/settings/update/'.$findPatient->id.'/plan-information') }}" class="btn btn-info btn-sm pull-right"> Update Payment Plan</a>
                       </div>
                     <!-- Card Content - Collapse -->
                     <div class="collapse show" id="collapseCardExample1">
                     <div class="card-body">
-                        {{ $findPatient->subscription->plan }} - {{ (  $findPatient->subscription->amount ) }}
+                        {{ $findPatient->subscription->plan }} - &#8358; {{ (  $findPatient->subscription->amount ) }}
                     </div>
                     </div>
                 </div>
@@ -182,7 +192,37 @@
 
   <!-- Custom scripts for all pages-->
   <script src="../../js/sb-admin-2.min.js"></script>
+  <script>
+$(document).ready(function(){
 
+ $('#search').keyup(function(){ 
+ 
+        var query = $(this).val();
+      
+        if(query != '')
+        {
+         var _token = $('input[name="_token"]').val();
+        
+         $.ajax({
+          url:"{{ route('autocomplete.fetch') }}",
+          method:"POST",
+          data:{query:query, _token:_token},
+          success:function(data){
+           
+           $('#searchList').fadeIn();  
+                    $('#searchList').html(data);
+          }
+         });
+        }
+    });
+
+    $(document).on('click', 'li', function(){  
+        $('#search').val($(this).text());  
+        $('#searchList').fadeOut();  
+    });  
+
+});
+</script>
 </body>
 
 </html>

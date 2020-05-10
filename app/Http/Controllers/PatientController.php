@@ -7,6 +7,9 @@ use App\User;
 use App\Complaint;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use Auth;
+use App\State;
+use Carbon\Carbon;
 
 class PatientController extends Controller
 {
@@ -203,9 +206,9 @@ class PatientController extends Controller
             $patient->occupation= $data['occupation'];
             $patient->address = $data['address'];
             $patient->gender = $data['gender'];
-            $patient->state = $data['state'];
+            $patient->state_id = $data['state'];
             $patient->dob = $data['dob'];
-            $patient->lga = $data['lga'];
+            $patient->lga_id = $data['lga'];
             $patient->marital_status = $data['marital_status'];
             $patient->phone_number = $data['phone_number'];
             $patient->genotype = $data['genotype'];
@@ -216,9 +219,14 @@ class PatientController extends Controller
             $patient->unique_id = $getId;
             // dd($patient);
             $patient->save();
-
+            
+            if(Auth::check() && Auth::user()->role_id < 3){
+                alert()->success('Created Successfully, proceed to login', 'Success')->autoclose(5000);
+                return redirect('/dashboard');
+            }
             alert()->success('Created Successfully, proceed to login', 'Success')->autoclose(5000);
             return redirect('/login');
+          
         }
         alert()->error('Unable to create your Account ', 'Error')->autoclose(5000);
         return redirect('/patients/register');
@@ -228,8 +236,8 @@ class PatientController extends Controller
 
     public function allPatient(){
 
-        $patients = User::where('role_id',6)->orderBy('name','desc')->paginate(10);
-
+        $patients = User::where('role_id',6)->with('subscription')->orderBy('name','desc')->paginate(10);
+    
         return view('Patient.all', compact('patients'));
 
     }
@@ -237,10 +245,14 @@ class PatientController extends Controller
 
     public function show($patient){
 
-        $findPatient = User::where('id',$patient)->firstOrfail();
+        $findPatient = User::where('id',$patient)->with(['state','lga'])->firstOrfail();
+     
+        $age = Carbon::parse($findPatient->dob)->age;
+      
+      
         $complaints  = Complaint::where('user_id',$patient)->orderBy('created_at','DESC')->get();
 
-        return view('Patient.show',compact(['findPatient','complaints']));
+        return view('Patient.show',compact(['findPatient','complaints','age']));
 
 
     }

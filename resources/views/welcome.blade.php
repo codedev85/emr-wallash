@@ -63,7 +63,7 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-      
+
         </style>
     </head>
     <body>
@@ -71,11 +71,11 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/dashboard') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
-                       
+
                         <a href="{{ url('/patients/register') }}">Register</a>
                     @endauth
                 </div>
@@ -83,10 +83,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Wallash - EMR
+                    Wallash - EHR
                 </div>
 
-              
+
             </div>
         </div>
     </body>

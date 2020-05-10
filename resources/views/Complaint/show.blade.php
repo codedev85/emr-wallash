@@ -9,7 +9,6 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
             <h1 class="h3 mb-0 text-gray-800"> {{ $findPatient->user['name'] }}'s Health Profile
                 - <small class="text-success">({{ $findPatient->user['unique_id'] }}) </small>
-
             </h1>
             @if($findPatient->status !== 2)
             <a href="{{ url('/prescriptions/'.$findPatient->id.'/add') }}" class="btn btn-primary pull-right"> Add Prescription</a>
@@ -35,8 +34,7 @@
                     </div>
                     <div class="col-md-7 mt-3">
                         <h6><b>Address: </b>{{ $findPatient->user['address'] }}</h6>
-                        <h6><b>State: </b>{{ $findPatient->user['state'] }}</h6>
-                        <h6><b>LGA: </b>{{ $findPatient->user['lga'] }}</h6>
+                   
                     </div>
                 </div>
             </div>
@@ -165,7 +163,7 @@
                                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                    Action</button>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ url('/complaints/'.$history->id.'/show') }}">View</a>
+                                    {{-- <a class="dropdown-item" href="{{ url('/complaints/'.$history->id.'/show') }}">View</a> --}}
                                     @if($history->status == 2)
                                     <a class="dropdown-item" href="{{ url('/prescriptions/'.$history->id.'/view') }}">View Prescription</a>
                                     @endif
@@ -246,7 +244,37 @@
 
   <!-- Custom scripts for all pages-->
   <script src="../../js/sb-admin-2.min.js"></script>
+  <script>
+$(document).ready(function(){
 
+ $('#search').keyup(function(){ 
+ 
+        var query = $(this).val();
+      
+        if(query != '')
+        {
+         var _token = $('input[name="_token"]').val();
+        
+         $.ajax({
+          url:"{{ route('autocomplete.fetch') }}",
+          method:"POST",
+          data:{query:query, _token:_token},
+          success:function(data){
+           
+           $('#searchList').fadeIn();  
+                    $('#searchList').html(data);
+          }
+         });
+        }
+    });
+
+    $(document).on('click', 'li', function(){  
+        $('#search').val($(this).text());  
+        $('#searchList').fadeOut();  
+    });  
+
+});
+</script>
 </body>
 
 </html>

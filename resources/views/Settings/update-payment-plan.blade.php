@@ -7,8 +7,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
-            <h1 class="h3 mb-0 text-gray-800"> Bulk Import - (Excel Import)</h1>
-            <a href="{{ URL::to('downloadExcel/xlsx') }}"> <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Export Data</button></a>
+            <h1 class="h3 mb-0 text-gray-800"> Update plan<small class="text-info">  - ( Current plan - {{$user->subscription->plan}} ) </small></h1>
           </div>
 
 
@@ -21,22 +20,26 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
                         <a href="#collapseCardExample5" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                        <h6 class="m-0 font-weight-bold text-primary">Import States</h6>
-
+                        <h6 class="m-0 font-weight-bold text-primary">Subscription</h6>
                         </a>
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample5">
                         <div class="card-body">
-                       <form action="{{ url('/import-data/') }}" method="POST" enctype="multipart/form-data">
+                       <form action="{{ url('/settings/update/'.Auth::user()->id.'/plan-information') }}" method="POST">
                         @csrf
-                        <label>Import State</label>
+                    
 
                         <div>
-                            <label>State</label>
-                            <input type="file" name="state" class="form-control"/>
-                           <span class="text-danger">{{ $errors->first('state') }} </span>
+                            <label>Subscription Plan</label>
+                           <select class="form-control" name="subscription_plan">
+                               <option value="{{$user->subscription->id}}">{{$user->subscription->plan}}</option>
+                               @foreach($plans as $plan)
+                               <option value="{{$plan->id}}">{{$plan->plan}}</option>
+                               @endforeach
+                           </select>
+                           {{-- <span class="text-danger">{{ $errors->first('plan') }} </span> --}}
                         </div>
-
+                   
                          <br>
                      <button class="btn btn-info">Register</button>
                        </form>
@@ -101,14 +104,14 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../../vendor/jquery/jquery.min.js"></script>
-  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../vendor/jquery/jquery.min.js"></script>
+  <script src="../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="../../js/sb-admin-2.min.js"></script>
+  <script src="../../../js/sb-admin-2.min.js"></script>
     <script>
 $(document).ready(function(){
 

@@ -17,6 +17,7 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('../css/sb-admin-2.css') }}" rel="stylesheet">
+  <link href="{{asset('../css/typeahead.css')}}" rel="stylesheet">
   <!-- Include this in your blade layout -->
 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -39,17 +40,67 @@
         text-align:center;
         border-radius:20px;
     }
+ .searchListClass{
+    color:black;
+
+ }
+ .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: center;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    width:400px;
+      margin-left:15px;
+    margin-right:20px;
+}
+
+
+.dropdown-menu a {
+    color: #4e73df;
+    text-decoration: none;
+    background-color: white;
+    /* padding:10px 4px; */
+}
+
+
+ .dropdown-menu a:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: transparent;
+    background-color: #4e73df;
+   
+}
 </style>
   {{-- ChartScript --}}
   {{-- @if($usersChart)
   {!! $usersChart->script() !!}
   @endif --}}
-  <script src="http://www.chartjs.org/dist/2.7.3/Chart.bundle.js"></script>
-  <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
-  
-  <script type="text/javascript" src="{{ asset('js/fusioncharts.js') }}"></script>
+  {{-- <script src="http://www.chartjs.org/dist/2.7.3/Chart.bundle.js"></script>
+  <script src="http://www.chartjs.org/samples/latest/utils.js"></script> --}}
+
+  {{-- <script type="text/javascript" src="{{ asset('js/fusioncharts.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/fusioncharts.charts.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/fusioncharts.theme.fint.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/fusioncharts.theme.fint.js') }}"></script> --}}
+
+<!-- typeahead js-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+<!-- end of typeahead js-->
+
 </head>
 
 <body id="page-top">
@@ -263,18 +314,36 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-
+{{-- @if(Auth::user()->role_id < 6) --}}
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+          <form method="post" action="{{url('search')}}" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            @csrf
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text" name="search" id="search" class="typeahead form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="submit">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
               </div>
             </div>
           </form>
+  {{-- @else
+     <form method="post" action="{{url('search')}}" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            @csrf
+            <div class="input-group">
+              <input type="text" name="search" id="searchP" class="typeahead form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+
+  @endif --}}
+              
+
+            
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -439,3 +508,7 @@
           </ul>
 
         </nav>
+         <div id="searchList" class="searchListClass">
+         </div>
+         {{-- <div id="searchListP" class="searchListClass">
+         </div> --}}

@@ -3,15 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
 
-class City extends Model
+class Lga extends Model
 {
     //
-    // use LogsActivity;
 
-   
-    // protected static $logAttributes = ['name', 'text'];
+    protected $guarded = [];
 
     public function state(){
 

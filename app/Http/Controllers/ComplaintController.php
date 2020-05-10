@@ -65,7 +65,7 @@ class ComplaintController extends Controller
 
     public function viewComplaints($patient){
 
-        $findPatient        =      Complaint::where('id',$patient)->with('user')->firstOrfail();
+        $findPatient        =      Complaint::where('id',$patient)->with(['user'])->firstOrfail();
 
                                     if($findPatient->status == 2){
 
@@ -87,7 +87,7 @@ class ComplaintController extends Controller
 
 
 
-        return view('Complaint.show', compact(['findPatient','complaintHistories']));
+        return view('Complaint.show', compact(['findPatient','complaintHistories','docName']));
 
 
     }

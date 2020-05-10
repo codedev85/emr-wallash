@@ -19,7 +19,7 @@
   <link href="../../css/sb-admin-2.css" rel="stylesheet">
   <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
   <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
-
+ 
 </head>
 
 <body class="bg-gradient-primary">
@@ -154,6 +154,7 @@
         });
     });
 </script>
+
 
 </body>
 
