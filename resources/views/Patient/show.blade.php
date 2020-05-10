@@ -26,9 +26,9 @@
                         <h6><b>Name: </b>{{ $findPatient->name }}</h6>
                         <h6><b>Email: </b>{{ $findPatient->email }}</h6>
                         <h6><b>Phoe Number: </b>{{ $findPatient->phone_number }}</h6>
-                        @if($age !== Null)
+                      
                           <h6><b>Age :</b>{{$age}} years old</h6>
-                        @endif
+                     
                     </div>
                     <div class="col-md-7 mt-3">
                         <h6><b>Address: </b>{{ $findPatient->address }}</h6>
