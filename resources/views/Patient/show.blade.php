@@ -124,7 +124,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach($complaints as  $history)
+                        {{-- @foreach($complaints as  $history)
                           <tr>
                           <td>{{ $history->user['name'] }}</td>
                           <td class="text-info">{{ $history->user['unique_id'] }}</td>
@@ -150,13 +150,11 @@
                                    Action</button>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ url('/prescriptions/'.$history->id.'/view') }}">View Prescription</a>
-                                    {{-- <a class="dropdown-item" href="">Prescribe</a> --}}
-                                    {{-- <a class="dropdown-item" href="#">Remove Patient</a> --}}
                                   </div>
                                 </div>
                           </td>
                           </tr>
-                      @endforeach
+                      @endforeach --}}
 
                     </tbody>
                   </table>
