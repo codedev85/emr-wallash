@@ -246,12 +246,12 @@ class PatientController extends Controller
     public function show($patient){
 
         $findPatient = User::where('id',$patient)->with(['state','lga'])->firstOrfail();
-     dd($findPatient);
+    //  dd($findPatient);
         $age = Carbon::parse($findPatient->dob)->age;
 
     //    dd($age);
         $complaints  = Complaint::where('user_id',$patient)->orderBy('created_at','DESC')->get();
-// dd($complaints);
+dd($complaints);
         return view('Patient.show',compact(['findPatient','complaints','age']));
 
 
