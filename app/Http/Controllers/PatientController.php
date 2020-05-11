@@ -70,7 +70,7 @@ class PatientController extends Controller
             $register = $request->session()->all();
             $states = DB::table("states")->pluck("name","id");
             // $register = $request->session()->get('register');
-           
+
         }
 
         return view('Patient.register-step2',compact(['register','states']));
@@ -219,14 +219,14 @@ class PatientController extends Controller
             $patient->unique_id = $getId;
             // dd($patient);
             $patient->save();
-            
+
             if(Auth::check() && Auth::user()->role_id < 3){
                 alert()->success('Created Successfully, proceed to login', 'Success')->autoclose(5000);
                 return redirect('/dashboard');
             }
             alert()->success('Created Successfully, proceed to login', 'Success')->autoclose(5000);
             return redirect('/login');
-          
+
         }
         alert()->error('Unable to create your Account ', 'Error')->autoclose(5000);
         return redirect('/patients/register');
@@ -237,7 +237,7 @@ class PatientController extends Controller
     public function allPatient(){
 
         $patients = User::where('role_id',6)->with('subscription')->orderBy('name','desc')->paginate(10);
-    
+
         return view('Patient.all', compact('patients'));
 
     }
@@ -246,9 +246,9 @@ class PatientController extends Controller
     public function show($patient){
 
         $findPatient = User::where('id',$patient)->with(['state','lga'])->firstOrfail();
-     
+     dd($findPatient);
         $age = Carbon::parse($findPatient->dob)->age;
-      
+
     //    dd($age);
         $complaints  = Complaint::where('user_id',$patient)->orderBy('created_at','DESC')->get();
 // dd($complaints);
