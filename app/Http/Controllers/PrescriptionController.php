@@ -75,7 +75,7 @@ class PrescriptionController extends Controller
     }
 
     public function viewPrescription($prescription){
-
+// dd($prescription);
 
        $prescription = Prescription::where('complaint_id',$prescription)->with(['user','complaint'])->first();
 
@@ -94,7 +94,7 @@ class PrescriptionController extends Controller
 
 
      $findPrescription = Prescription::where('user_id',$prescription)->with('complaint')->paginate(10);
-    
+
 
      return view('Patient.my-prescription',compact('findPrescription'));
    }

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\AccountInfo;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Complaint;
+use Carbon\Carbon;
 
 
 
@@ -66,6 +68,22 @@ class DoctorController extends Controller
         $doctors = User::where('role_id',2)->orderby('name')->paginate(10);
 
         return view('Doctor.all',compact('doctors'));
+    }
+
+    public function show($patient){
+
+        $findPatient = User::where('id',$patient)->with(['state','lga'])->firstOrfail();
+
+        $age = Carbon::parse($findPatient->dob)->age;
+
+
+        $complaints  = Complaint::where('user_id',$patient)->orderBy('created_at','DESC')->paginate(1);
+    // dd(!$complaints->isEmpty());
+
+
+        return view('Doctor.show',compact(['findPatient','complaints','age']));
+
+
     }
 
 

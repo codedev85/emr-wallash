@@ -32,10 +32,10 @@
                     </div>
                     <div class="col-md-7 mt-3">
                         <h6><b>Address: </b>{{ $findPatient->address }}</h6>
-                        {{-- @if($findPatient->state['name'] != Null)
+                        @if($findPatient->state['name'] != Null)
                         <h6><b>State: </b>{{ Ucfirst($findPatient->state['name']) }} State</h6>
                         <h6><b>LGA: </b>{{ $findPatient->lga['name'] }}</h6>
-                        @endif --}}
+                        @endif
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
             <div class="card shadow mb-4">
                 <!-- Card Header - Accordion -->
                 <a href="#collapseCardExample1" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                <h6 class="m-0 font-weight-bold text-primary">Health Summary / Allergies</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Allergies</h6>
                 </a>
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="collapseCardExample1">
@@ -125,7 +125,6 @@
                     </thead>
                     <tbody>
                         @foreach($complaints as  $history)
-
                           <tr>
                           <td>{{ $history->user['name'] }}</td>
                           <td class="text-info">{{ $history->user['unique_id'] }}</td>
@@ -152,7 +151,7 @@
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                       @if($history->status == 2)
                                     <a class="dropdown-item" href="{{ url('/prescriptions/'.$history->id.'/view') }}">View Prescription</a>
-                                       @endif
+                                      @endif
                                 </div>
                                 </div>
                           </td>
@@ -164,9 +163,9 @@
                 </div>
               </div>
             </div>
-@endif
+{{ $complaints->links() }}
           </div>
-
+@endif
       </div>
       <!-- End of Main Content -->
 

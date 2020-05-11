@@ -122,6 +122,7 @@ Auth::routes();
                     Route::post('store','DoctorController@store')->middleware(['auth','admin']);
                     Route::get('/{doctor}/edit','DoctorController@edit')->middleware(['auth','admin']);
                     Route::post('/{doctor}/update','DoctorController@update')->middleware(['auth','admin']);
+                    Route::get('/{doctor}/show','DoctorController@show')->middleware(['auth','admin']);
                     // Route::delete('/{subscription}/delete','SubscriptionController@delete');
 
                 });

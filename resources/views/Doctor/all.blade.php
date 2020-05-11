@@ -53,7 +53,7 @@
                                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                    Action</button>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ url('/patients/'.$patient->id.'/show') }}">View {{ $patient->name }}'s Profile</a>
+                                    <a class="dropdown-item" href="{{ url('/doctors/'.$patient->id.'/show') }}">View {{ $patient->name }}'s Profile</a>
                                     {{-- @if($history->status == 2)
                                     <a class="dropdown-item" href="{{ url('/prescriptions/'.$patient->id.'/view') }}">View Prescription</a>
                                     @endif --}}
@@ -138,31 +138,31 @@
   <script>
 $(document).ready(function(){
 
- $('#search').keyup(function(){ 
- 
+ $('#search').keyup(function(){
+
         var query = $(this).val();
-      
+
         if(query != '')
         {
          var _token = $('input[name="_token"]').val();
-        
+
          $.ajax({
           url:"{{ route('autocomplete.fetch') }}",
           method:"POST",
           data:{query:query, _token:_token},
           success:function(data){
-           
-           $('#searchList').fadeIn();  
+
+           $('#searchList').fadeIn();
                     $('#searchList').html(data);
           }
          });
         }
     });
 
-    $(document).on('click', 'li', function(){  
-        $('#search').val($(this).text());  
-        $('#searchList').fadeOut();  
-    });  
+    $(document).on('click', 'li', function(){
+        $('#search').val($(this).text());
+        $('#searchList').fadeOut();
+    });
 
 });
 </script>
