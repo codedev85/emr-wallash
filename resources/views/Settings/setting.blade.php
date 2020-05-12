@@ -39,10 +39,10 @@
                         <h6><b>Address: </b>{{ $findPatient->address }}</h6>
                         {{-- <h6><b>State: </b>{{ $findPatient->state }}</h6>
                         <h6><b>LGA: </b>{{ $findPatient->lga }}</h6> --}}
-                            @if($findPatient->state['name'] != Null)
+                       {{-- @if($findPatient->state['name'] !== Null)
                         <h6><b>State: </b>{{ Ucfirst($findPatient->state->name) }} State</h6>
                         <h6><b>LGA: </b>{{ $findPatient->lga->name }}</h6>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
             </div>
