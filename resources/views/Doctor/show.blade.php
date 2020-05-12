@@ -8,7 +8,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800"> {{ $findPatient->name }}'s health Profile</h1>
+            <h1 class="h3 mb-0 text-gray-800">Dr {{ $findPatient->last_name }}'s  Profile</h1>
           </div>
 
 
@@ -23,7 +23,7 @@
                 </div>
                 <div class="row">
                     <div class="card-body  col-md-5">
-                        <h6><b>Name: </b>{{ $findPatient->name }}</h6>
+                        <h6><b>Name: </b>{{ $findPatient->last_name }} {{ $findPatient->name }}</h6>
                         <h6><b>Email: </b>{{ $findPatient->email }}</h6>
                         <h6><b>Phoe Number: </b>{{ $findPatient->phone_number }}</h6>
 

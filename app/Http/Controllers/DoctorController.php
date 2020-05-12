@@ -27,7 +27,8 @@ class DoctorController extends Controller
 // dd($request);
         // $this->email = $request['email'];
         $data = $request->validate([
-            'name'        => 'required',
+            'first_name'  => 'required',
+            'last_name'   =>'required',
             'email'       => 'required',
             'address'     =>'required',
             'phone_number'=> 'required'
@@ -43,6 +44,7 @@ class DoctorController extends Controller
         array_push($data , $randStrPassword);
         $newDoctor = new User;
         $newDoctor->name         = $data['name'];
+        $newDoctor->last_name    = $data['last_name'];
         $newDoctor->email        = $data['email'];
         $newDoctor->address      = $data['address'];
         $newDoctor->phone_number = $data['phone_number'];

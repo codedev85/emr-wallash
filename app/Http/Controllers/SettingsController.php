@@ -31,12 +31,14 @@ class SettingsController extends Controller
 
         request()->validate([
             'name'         => 'required',
+            'last_name'    =>'required',
             'address'      => 'required',
             'phone_number' => 'required'
         ]);
 
         User::where('id',Auth::user()->id)->update([
             'name'         => $request->input('name'),
+            'last_name'    => $request->input('last_name'),
             'phone_number' => $request->input('phone_number'),
             'address'      => $request->input('address'),
         ]);

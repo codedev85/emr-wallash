@@ -8,7 +8,8 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
             <h1 class="h3 mb-0 text-gray-800"> Bulk Import - (Excel Import)</h1>
-            <a href="{{ URL::to('downloadExcel/xlsx') }}"> <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Export Data</button></a>
+            <a href="{{ url('/import-lga/') }}"> <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Import LGA</button></a>
+            {{-- <a href="{{ URL::to('downloadExcel/xlsx') }}"> <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Export Data</button></a> --}}
           </div>
 
 
@@ -38,7 +39,7 @@
                         </div>
 
                          <br>
-                     <button class="btn btn-info">Register</button>
+                     <button class="btn btn-info">Import Data</button>
                        </form>
                         </div>
                         </div>
@@ -112,31 +113,31 @@
     <script>
 $(document).ready(function(){
 
- $('#search').keyup(function(){ 
- 
+ $('#search').keyup(function(){
+
         var query = $(this).val();
-      
+
         if(query != '')
         {
          var _token = $('input[name="_token"]').val();
-        
+
          $.ajax({
           url:"{{ route('autocomplete.fetch') }}",
           method:"POST",
           data:{query:query, _token:_token},
           success:function(data){
-           
-           $('#searchList').fadeIn();  
+
+           $('#searchList').fadeIn();
                     $('#searchList').html(data);
           }
          });
         }
     });
 
-    $(document).on('click', 'li', function(){  
-        $('#search').val($(this).text());  
-        $('#searchList').fadeOut();  
-    });  
+    $(document).on('click', 'li', function(){
+        $('#search').val($(this).text());
+        $('#searchList').fadeOut();
+    });
 
 });
 </script>

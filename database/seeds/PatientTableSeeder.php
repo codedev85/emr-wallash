@@ -14,7 +14,8 @@ class PatientTableSeeder extends Seeder
     public function run()
     {
          User::create([
-            'name' => 'John Doe',
+            'name' => 'John',
+            'last_name'=> 'Doe',
             'email' => 'patient@patient.com',
             'role_id' => 6,
             'password' => Hash::make('password'),

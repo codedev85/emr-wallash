@@ -84,7 +84,7 @@ class DashboardController extends Controller
     
     //   $data = User::where('name', 'LIKE', "%{$query}%")
     //     ->get();
-      $data =  User::select(DB::raw("concat(name , ' - ( ' , (unique_id) , ' )') as name"))->where("name","LIKE","%{$request->input('query')}%")
+      $data =  User::select(DB::raw("concat(name ,' ',  last_name ,' - ( ' , (unique_id) , ' )') as name"))->where("name","LIKE","%{$request->input('query')}%")
                                                                                             ->orwhere("unique_id","LIKE","%{$request->input('query')}%")
                                                                                             ->get();
       $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
@@ -106,17 +106,19 @@ class DashboardController extends Controller
        $search = $request->input('search');
       
         $arrayStr = explode(" " , $search);
-      
+    //   dd($arrayStr);
         $str1 = $arrayStr[0];
         $str2 = $arrayStr[1];
-        $concatStr = $str1 ." ". $str2;
+        // $concatStr = $str1 ." ". $str2;
         // ?dd($concatStr);
         // $data =  User::select(DB::raw("concat(name , ' - ( ' , (unique_id) , ' )') as name"))->where("name","LIKE","%{$concatStr}%")
         // // ->orwhere("unique_id","LIKE","%{$request->input('query')}%")
         // ->get();
-        $data =  User::where("name","LIKE","%{$concatStr}%")
+        $data =  User::where("name","LIKE","%{$str1}%")
+                       ->where("last_name","LIKE","%{$str2}%")
                        ->where("unique_id","LIKE","%{$arrayStr[4]}%")
                        ->get();
+                    //    dd($data);
        
         return view('Search.search',compact('data'));
     }

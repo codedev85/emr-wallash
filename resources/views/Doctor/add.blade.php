@@ -30,10 +30,15 @@
                         <label>Register</label>
 
                         <div>
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="Full Name"/>
-                           <span class="text-danger">{{ $errors->first('plan') }} </span>
+                            <label>First Name</label>
+                            <input type="text" name="first_name" class="form-control" placeholder="First Name"/>
+                           <span class="text-danger">{{ $errors->first('first_name') }} </span>
                         </div>
+                        <div>
+                          <label>Last Name</label>
+                          <input type="text" name="last_name" class="form-control" placeholder="Last Name"/>
+                         <span class="text-danger">{{ $errors->first('last_name') }} </span>
+                      </div>
                         <div>
                             <label>Email</label>
                            <input type="email" name="email" class="form-control" placeholder="Email" />

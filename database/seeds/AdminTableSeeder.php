@@ -17,6 +17,7 @@ class AdminTableSeeder extends Seeder
         //   factory(User::class)->create();
         User::create([
             'name' => 'Administrtor',
+            'last_name'=> 'Administrator',
             'email' => 'admin@admin.com',
             'role_id' => 1,
             'password' => Hash::make('password'),

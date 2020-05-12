@@ -31,7 +31,7 @@
 
                 <div class="row">
                     <div class="card-body  col-md-5">
-                        <h6><b>Name: </b>{{ $findPatient->name }}</h6>
+                        <h6><b>Name: </b>{{ $findPatient->last_name }} {{ $findPatient->name }}</h6>
                         <h6><b>Email: </b>{{ $findPatient->email }}</h6>
                         <h6><b>Phoe Number: </b>{{ $findPatient->phone_number }}</h6>
                     </div>

@@ -7,7 +7,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
-            <h1 class="h3 mb-0 text-gray-800"> {{ $userComplaint->user->name }}'s Health Profile
+            <h1 class="h3 mb-0 text-gray-800"> {{ $userComplaint->user->last_name }}'s Health Profile
                 - <small class="text-success">({{ $userComplaint->user['unique_id'] }}) </small>
 
             </h1>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="row">
                     <div class="card-body  col-md-5">
-                        <h6><b>Name: </b>{{ $userComplaint->user['name'] }}</h6>
+                        <h6><b>Name: </b> {{ $userComplaint->user['last_name'] }} {{ $userComplaint->user['name'] }}</h6>
                         <h6><b>Email: </b>{{ $userComplaint->user['email'] }}</h6>
                         <h6><b>Phoe Number: </b>{{ $userComplaint->user['phone_number']}}</h6>
                     </div>

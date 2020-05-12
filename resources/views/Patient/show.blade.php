@@ -23,9 +23,9 @@
                 </div>
                 <div class="row">
                     <div class="card-body  col-md-5">
-                        <h6><b>Name: </b>{{ $findPatient->name }}</h6>
+                        <h6><b>Name: </b>{{$findPatient->last_name}}  {{ $findPatient->name }}</h6>
                         <h6><b>Email: </b>{{ $findPatient->email }}</h6>
-                        <h6><b>Phoe Number: </b>{{ $findPatient->phone_number }}</h6>
+                        <h6><b>Phone Number: </b>{{ $findPatient->phone_number }}</h6>
 
                           <h6><b>Age :</b>{{$age}} years old</h6>
 
@@ -43,7 +43,7 @@
             <!-- Basic Card Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Genoty /Blood Group</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Genotype /Blood Group</h6>
                 </div>
                 <div class="card-body">
                 <h5><b>Genotype: </b>{{ $findPatient->genotype }}</h5>
@@ -78,7 +78,7 @@
             <div class="card shadow mb-4">
                 <!-- Card Header - Accordion -->
                 <a href="#collapseCardExample1" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                <h6 class="m-0 font-weight-bold text-primary">Health Summary / Allergies</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Allergies</h6>
                 </a>
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="collapseCardExample1">
@@ -111,7 +111,8 @@
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                       <tr>
-                      <th>Name</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
                       <th>Unique Id</th>
                       <th>Email</th>
                       <th>Phone Mumber</th>
@@ -128,6 +129,7 @@
 
                           <tr>
                           <td>{{ $history->user['name'] }}</td>
+                          <td>{{ $history->user['last_name'] }}</td>
                           <td class="text-info">{{ $history->user['unique_id'] }}</td>
                           <td>{{ $history->user['email']}}</td>
                           <td>{{ $history->user['phone_number'] }}</td>

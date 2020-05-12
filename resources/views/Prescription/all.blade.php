@@ -26,7 +26,8 @@
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                       <tr>
-                      <th>Name</th>
+                      <th>Last Name</th>
+                      <th>First Name</th>
                       <th>Unique Id</th>
                       <th>Email</th>
                       <th>Prescribed By</th>
@@ -40,6 +41,7 @@
                     <tbody>
                        @foreach($prescriptions as  $prescription)
                           <tr>
+                          <td>{{ $prescription->user->last_name }}</td>
                           <td>{{ $prescription->user->name }}</td>
                           <td class="text-info">{{ $prescription->user->unique_id }}</td>
                           <td>{{ $prescription->user->email }}</td>

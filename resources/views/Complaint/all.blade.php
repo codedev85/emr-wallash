@@ -18,7 +18,8 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                    <th>Name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Unique Id</th>
                     <th>Email</th>
                     <th>Phone Mumber</th>
@@ -44,6 +45,7 @@
                       @foreach($complaints as  $history)
                         <tr>
                         <td>{{ $history->user->name }}</td>
+                        <td>{{$history->user->last_name}}</td>
                         <td class="text-info">{{ $history->user->unique_id }}</td>
                         <td>{{ $history->user->email}}</td>
                         <td>{{ $history->user->phone_number }}</td>

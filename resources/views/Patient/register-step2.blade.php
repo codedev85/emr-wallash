@@ -98,7 +98,7 @@
                   </div>
                   <div class="col-sm-6">
                     <label for="lga">LGA</label>
-                    <select name="city" class="form-control">
+                    <select name="lga" class="form-control">
 
                     </select>
                   </div>
@@ -130,6 +130,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+      console.log('ehe')
         $('select[name="state"]').on('change', function() {
             var stateID = $(this).val();
             if(stateID) {
@@ -140,16 +141,16 @@
                     success:function(data) {
 
 
-                        $('select[name="city"]').empty();
+                        $('select[name="lga"]').empty();
                         $.each(data, function(key, value) {
-                            $('select[name="city"]').append('<option value="'+ key +'">'+ value +'</option>');
+                            $('select[name="lga"]').append('<option value="'+ key +'">'+ value +'</option>');
                         });
 
 
                     }
                 });
             }else{
-                $('select[name="city"]').empty();
+                $('select[name="lga"]').empty();
             }
         });
     });

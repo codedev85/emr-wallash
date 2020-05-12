@@ -29,7 +29,8 @@
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                       <tr>
-                      <th>Name</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
                       <th>Unique Id</th>
                       <th>Email</th>
                       <th>Phone Number</th>
@@ -41,6 +42,7 @@
                        @foreach($data as  $user)
                           <tr>
                           <td>{{$user->name}}</td>
+                          <td>{{$user->last_name}}</td>
                           <td>{{$user->unique_id}}</td>
                           <td>{{$user->email}}</td>
                           <td>{{$user->phone_number}}</td>

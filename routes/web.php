@@ -34,11 +34,15 @@ Auth::routes();
             // Route::get('chart-line', 'ChartController@chartLine');
             Route::get('chart-line-ajax', 'DashboardController@chartLineAjax');
 
-
+            //Import and Export States
             Route::get('/import/','StateController@importState')->middleware(['auth','admin']);
             Route::post('/import-data/','StateController@importStateData')->middleware(['auth','admin']);
             Route::get('/downloadExcel/{type}','StateController@exportStateData')->middleware(['auth','admin']);
 
+            //import and export LGA
+            Route::get('/import-lga/','LgaController@importLga')->middleware(['auth','admin']);
+            Route::post('/import-lga-data/','LgaController@importLgaData')->middleware(['auth','admin']);
+            Route::get('/downloadExcelLga/{type}','LgaController@exportLgaData')->middleware(['auth','admin']);
 
             Route::group(['prefix'=> 'patients'] , function(){
 

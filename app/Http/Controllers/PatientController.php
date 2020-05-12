@@ -35,23 +35,38 @@ class PatientController extends Controller
 
       $validatedData =  request()->validate([
             'name'     => 'required',
+            'lastname' => 'required',
             'email'    => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
+        $password = $request->input('password');
+        $cpassword = $request->input('confirm_password');
+   
+    if($password === $cpassword){
 
-       if(empty($request->session()->get('register'))){
+            if(empty($request->session()->get('register'))){
 
-            $register = new User();
-            $register->fill($validatedData);
-            $request->session()->put('register', $register);
+                $register = new User();
+                $register->fill($validatedData);
+                $request->session()->put('register', $register);
 
-        }else{
+            }else{
 
-            $register = $request->session()->get('register');
-            $register->fill($validatedData);
-            $request->session()->put('register', $register);
-        }
-        return redirect('/patients/store/step-two');
+                $register = $request->session()->get('register');
+                $register->fill($validatedData);
+                $request->session()->put('register', $register);
+            
+            }
+            
+            return redirect('/patients/store/step-two');
+
+    }else{
+
+        alert()->error('The password does not match', 'Oops!!!')->autoclose(5000);
+        return back()->withInput();
+
+    }
+      
 
     //   $patient = new Patient();
     //   $patient->name     = $request['name'];
@@ -70,7 +85,7 @@ class PatientController extends Controller
             $register = $request->session()->all();
             $states = DB::table("states")->pluck("name","id");
             // $register = $request->session()->get('register');
-
+            
         }
 
         return view('Patient.register-step2',compact(['register','states']));
@@ -78,7 +93,7 @@ class PatientController extends Controller
 
     public function myformAjax($id)
     {
-        $cities = DB::table("cities")
+        $cities = DB::table("lgas")
                     ->where("state_id",$id)
                     ->pluck("name","id");
         return json_encode($cities);
@@ -201,6 +216,7 @@ class PatientController extends Controller
         //  dd($data);
             $patient = new User();
             $patient->name = $data['name'];
+            $patient->last_name = $data['lastname'];
             $patient->email = $data['email'];
             $patient->password = Hash::make($data['password']);
             $patient->occupation= $data['occupation'];
