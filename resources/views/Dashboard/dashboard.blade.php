@@ -83,11 +83,11 @@
         </div>
 
         <!-- Content Row -->
-       
+
         <div class="row">
             <div class="col-xl-8 col-lg-7">
             <div class="card shadow mb-4">
-          
+
               <!-- Card Body -->
               <div class="card-body">
                 <div class="chart-area">
@@ -206,8 +206,23 @@
         @elseif(Auth::user()->role_id == 6)
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800"> {{ $findPatient->name }}'s health Profile</h1>
+            <h1 class="h3 mb-0 text-gray-800"> {{ $findPatient->name }}'s Dashboard <br>
+                {{-- @if(Auth::user()->id == $findPatient->id) --}}
+                <a href="{{ url('upload/'.$findPatient->id) }}"><button class="btn btn-sm btn-primary">Add Avatar</button></a>
+                {{-- @endif --}}
+            </h1>
+
+            {{-- @if($findPatient->avater) --}}
+            <img src="{{asset('storage/'.$findPatient->avatar)}}" class="img-thumbnail"  width="140" height="140"/>
+
+            {{-- @else
+                <img id="image" src="{{asset('/img/avatar2.png')}}" /> --}}
+            {{-- @endif --}}
+
           </div>
+          {{-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800"> {{ $findPatient->name }}'s health Profile</h1>
+          </div> --}}
 
           {{-- <div class="row">
 
@@ -310,7 +325,7 @@
                     </div>
                     <div class="col-md-7 mt-3">
                         <h6><b>Address: </b>{{ $findPatient->address }}</h6>
-                        @if($findPatient->state->name !== Null)
+                        @if($findPatient->state['name'] !== Null)
                         <h6><b>State: </b>{{ $findPatient->state->name }}</h6>
                         <h6><b>LGA: </b>{{ $findPatient->lga->name }}</h6>
                         @endif
@@ -436,7 +451,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="../../js/sb-admin-2.min.js"></script>
- 
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
@@ -458,10 +473,10 @@
                     delay:500,
                     source:  function (query, process) {
                     return $.get(path, { query: query }, function (data) {
-                      
+
                              return process(data) ;
 
-                      
+
                         });
                     }
                 });
@@ -482,66 +497,66 @@
 <script>
 $(document).ready(function(){
 
- $('#search').keyup(function(){ 
- 
+ $('#search').keyup(function(){
+
         var query = $(this).val();
-      
+
         if(query != '')
         {
          var _token = $('input[name="_token"]').val();
-        
+
          $.ajax({
           url:"{{ route('autocomplete.fetch') }}",
           method:"POST",
           data:{query:query, _token:_token},
           success:function(data){
-           
-           $('#searchList').fadeIn();  
+
+           $('#searchList').fadeIn();
                     $('#searchList').html(data);
           }
          });
         }
     });
 
-    $(document).on('click', 'li', function(){  
-        $('#search').val($(this).text());  
-        $('#searchList').fadeOut();  
-    });  
+    $(document).on('click', 'li', function(){
+        $('#search').val($(this).text());
+        $('#searchList').fadeOut();
+    });
 
 });
 
 /****
- Below Script is for patient search to search thru prescriptions 
+ Below Script is for patient search to search thru prescriptions
  implement when ready
 ****/
 
 // $(document).ready(function(){
 
-//  $('#searchP').keyup(function(){ 
- 
+//  $('#searchP').keyup(function(){
+
 //         var query = $(this).val();
-      
+
 //         if(query != '')
 //         {
 //          var _token = $('input[name="_token"]').val();
-        
+
 //          $.ajax({
 //           url:"{{ route('autocomplete.fetch') }}",
 //           method:"POST",
 //           data:{query:query, _token:_token},
 //           success:function(data){
-           
-//            $('#searchListP').fadeIn();  
+
+//            $('#searchListP').fadeIn();
 //                     $('#searchListP').html(data);
 //           }
 //          });
 //         }
 //     });
 
-//     $(document).on('click', 'li', function(){  
-//         $('#searchP').val($(this).text());  
-//         $('#searchListP').fadeOut();  
-//     });  
+//     $(document).on('click', 'li', function(){
+//         $('#searchP').val($(this).text());
+//         $('#searchListP').fadeOut();
+//     });
 
 // });
 </script>

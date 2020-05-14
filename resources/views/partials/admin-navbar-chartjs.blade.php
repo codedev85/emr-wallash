@@ -83,6 +83,7 @@
     background-color: #4e73df;
 
 }
+
 </style>
   {{-- ChartScript --}}
   {{-- @if($usersChart)

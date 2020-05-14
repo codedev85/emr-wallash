@@ -79,6 +79,14 @@
     background-color: #4e73df;
 
 }
+#image{
+    background:none;
+}
+
+#image:hover{
+    background:#eaedf7;
+   
+}
 </style>
   {{-- ChartScript --}}
 

@@ -8,7 +8,19 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800"> {{ $findPatient->name }}'s health Profile</h1>
+            <h1 class="h3 mb-0 text-gray-800"> {{ $findPatient->name }}'s health Profile <br>
+                {{-- @if(Auth::user()->id == $findPatient->id) --}}
+                <a href="{{ url('upload/'.$findPatient->id) }}"><button class="btn btn-sm btn-primary">Add Avatar</button></a>
+                {{-- @endif --}}
+            </h1>
+
+            {{-- @if($findPatient->avater) --}}
+            <img src="{{asset('storage/'.$findPatient->avatar)}}" class="img-thumbnail"  width="140" height="140"/>
+
+            {{-- @else
+                <img id="image" src="{{asset('/img/avatar2.png')}}" /> --}}
+            {{-- @endif --}}
+
           </div>
 
 
@@ -262,6 +274,12 @@ $(document).ready(function(){
     });
 
 });
+
+
+
+// $("#image").click(function() {
+//     $("input[id='my_file']").click();
+// });
 </script>
 </body>
 

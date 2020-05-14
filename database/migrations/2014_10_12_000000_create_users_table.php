@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->integer('lga_id')->nullable();
             $table->integer('history_id')->nullable();
             $table->string('unique_id')->nullable();
+            $table->string('avater')->nullable();
 
 
             $table->longtext('address');

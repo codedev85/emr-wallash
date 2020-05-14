@@ -161,5 +161,7 @@ Auth::routes();
             Route::post('search','DashboardController@search')->name('search');
             // Route::post('autocomplete', 'DashboardController@fetchPatientQuery')->name('autocomplete.fetch');
             // Route::post('search','DashboardController@search')->name('search');
+            Route::get('upload/{id}','AvartarController@upload')->middleware('auth');
+            Route::post('upload-avatar/{avatar}','AvartarController@uploadAvatar')->middleware('auth');
 
 
