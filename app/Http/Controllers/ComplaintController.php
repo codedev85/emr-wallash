@@ -67,7 +67,7 @@ class ComplaintController extends Controller
 
         $findPatient        =      Complaint::where('id',$patient)->with(['user'])->firstOrfail();
 
-                                    if($findPatient->status == 2){
+                                    if($findPatient->status <= 2){
 
                                         $docName = Prescription::where('complaint_id',$findPatient->id)->first();
                                       
