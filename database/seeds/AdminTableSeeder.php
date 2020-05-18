@@ -20,7 +20,7 @@ class AdminTableSeeder extends Seeder
             'last_name'=> 'Administrator',
             'email' => 'admin@admin.com',
             'role_id' => 1,
-            'password' => Hash::make('password'),
+            'password' => Hash::make('secret@'),
             'address'       => 'Lagos Nigeria',
             'phone_number'  => '08109403277',
         ]);
