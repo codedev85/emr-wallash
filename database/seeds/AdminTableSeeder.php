@@ -14,7 +14,7 @@ class AdminTableSeeder extends Seeder
     public function run()
     {
           //
-        //   factory(User::class)->create();
+        //    factory(User::class)->create();
         User::create([
             'name' => 'Administrtor',
             'last_name'=> 'Administrator',

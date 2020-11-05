@@ -130,7 +130,7 @@ Auth::routes();
                     // Route::delete('/{subscription}/delete','SubscriptionController@delete');
 
                 });
-           });
+        
 
             Route::group(['prefix'=> 'settings'] , function(){
                 Route::get('/{setting}/profile','SettingsController@profile')->middleware(['auth']);
